@@ -20,7 +20,7 @@ export default function Login(props: MacActions) {
     if (user.password === "42" || user.password === password) {
       // not set password or password correct
       props.setLogin(true);
-    } else if (password !== "") {
+    } else if (password !== "42") {
       // password not null and incorrect
       setSign("Incorrect password");
     }

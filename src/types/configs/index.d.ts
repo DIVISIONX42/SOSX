@@ -1,5 +1,5 @@
 export { AppsData } from "./apps";
-export { BearMdData, BearData } from "./bear";
+export { BunnyMdData, BunnyData } from "./bunny";
 export { LaunchpadData } from "./launchpad";
 export { MusicData } from "./music";
 export { TerminalData } from "./terminal";

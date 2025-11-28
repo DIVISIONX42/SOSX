@@ -13,8 +13,8 @@ const terminal: TerminalData[] = [
         content: (
           <div className="py-1">
             <div>
-              Hi, this is Xiaohan Zou. I am a PhD student at the Computer Science and
-              Engineering department of Pennsylvania State University.
+              Hi, this is 0. I am a PhD student at the Computer Science and Engineering
+              department of Pennsylvania State University.
             </div>
           </div>
         )

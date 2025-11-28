@@ -1,4 +1,4 @@
-export interface BearMdData {
+export interface BunnyMdData {
   id: string;
   title: string;
   file: string;
@@ -7,9 +7,9 @@ export interface BearMdData {
   link?: string;
 }
 
-export interface BearData {
+export interface BunnyData {
   id: string;
   title: string;
   icon: string;
-  md: BearMdData[];
+  md: BunnyMdData[];
 }

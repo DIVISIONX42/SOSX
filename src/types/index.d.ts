@@ -9,8 +9,8 @@ export interface MacActions {
 
 export {
   AppsData,
-  BearMdData,
-  BearData,
+  BunnyMdData,
+  BunnyData,
   LaunchpadData,
   MusicData,
   TerminalData,

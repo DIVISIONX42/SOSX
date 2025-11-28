@@ -77,7 +77,11 @@ const HowDare = ({ setRMRF }: { setRMRF: (value: boolean) => void }) => {
       <canvas ref={canvasRef}></canvas>
       <div className="font-avenir absolute h-28 text-center space-y-4 m-auto inset-0">
         <div text-4xl>{emoji}</div>
-        <div text-3xl>HOW DARE YOU!</div>
+        <div text-3xl>
+          SAi says hi!
+          <br />
+          mood of ur system =3
+        </div>
         <div>Click to go back</div>
       </div>
     </div>

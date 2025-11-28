@@ -5,8 +5,8 @@ import rehypeKatex from "rehype-katex";
 import rehypeExternalLinks from "rehype-external-links";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula, prism } from "react-syntax-highlighter/dist/esm/styles/prism";
-import bear from "~/configs/bear";
-import type { BearMdData } from "~/types";
+import bunny from "~/configs/bunny";
+import type { BunnyMdData } from "~/types";
 
 interface ContentProps {
   contentID: string;
@@ -14,20 +14,20 @@ interface ContentProps {
 }
 
 interface MiddlebarProps {
-  items: BearMdData[];
+  items: BunnyMdData[];
   cur: number;
   setContent: (id: string, url: string, index: number) => void;
 }
 
 interface SidebarProps {
   cur: number;
-  setMidBar: (items: BearMdData[], index: number) => void;
+  setMidBar: (items: BunnyMdData[], index: number) => void;
 }
 
-interface BearState extends ContentProps {
+interface BunnyState extends ContentProps {
   curSidebar: number;
   curMidbar: number;
-  midbarList: BearMdData[];
+  midbarList: BunnyMdData[];
 }
 
 const Highlighter = (dark: boolean): any => {
@@ -65,9 +65,9 @@ const Sidebar = ({ cur, setMidBar }: SidebarProps) => {
         <span className="i-akar-icons:settings-vertical text-xl" />
       </div>
       <ul>
-        {bear.map((item, index) => (
+        {bunny.map((item, index) => (
           <li
-            key={`bear-sidebar-${item.id}`}
+            key={`bunny-sidebar-${item.id}`}
             className={`pl-6 h-8 hstack cursor-default ${
               cur === index ? "bg-red-500" : "bg-transparent"
             } ${cur === index ? "" : "hover:bg-gray-600"}`}
@@ -85,9 +85,9 @@ const Sidebar = ({ cur, setMidBar }: SidebarProps) => {
 const Middlebar = ({ items, cur, setContent }: MiddlebarProps) => {
   return (
     <ul>
-      {items.map((item: BearMdData, index: number) => (
+      {items.map((item: BunnyMdData, index: number) => (
         <li
-          key={`bear-midbar-${item.id}`}
+          key={`bunny-midbar-${item.id}`}
           className={`h-24 flex flex-col cursor-default border-l-2 ${
             cur === index
               ? "border-red-500 bg-white dark:bg-gray-900"
@@ -187,16 +187,16 @@ const Content = ({ contentID, contentURL }: ContentProps) => {
   );
 };
 
-const Bear = () => {
-  const [state, setState] = useState<BearState>({
+const Bunny = () => {
+  const [state, setState] = useState<BunnyState>({
     curSidebar: 0,
     curMidbar: 0,
-    midbarList: bear[0].md,
-    contentID: bear[0].md[0].id,
-    contentURL: bear[0].md[0].file
+    midbarList: bunny[0].md,
+    contentID: bunny[0].md[0].id,
+    contentURL: bunny[0].md[0].file
   });
 
-  const setMidBar = (items: BearMdData[], index: number) => {
+  const setMidBar = (items: BunnyMdData[], index: number) => {
     setState({
       curSidebar: index,
       curMidbar: 0,
@@ -216,7 +216,7 @@ const Bear = () => {
   };
 
   return (
-    <div className="bear font-avenir flex h-full">
+    <div className="bunny font-avenir flex h-full">
       <div className="w-44 overflow-auto bg-gray-700">
         <Sidebar cur={state.curSidebar} setMidBar={setMidBar} />
       </div>
@@ -234,4 +234,4 @@ const Bear = () => {
   );
 };
 
-export default Bear;
+export default Bunny;

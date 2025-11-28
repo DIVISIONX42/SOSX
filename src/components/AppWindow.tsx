@@ -187,11 +187,11 @@ const Window = (props: WindowProps) => {
       lockAspectRatioExtraHeight={props.aspectRatio ? appBarHeight : undefined}
       style={{ zIndex: props.z }}
       onMouseDown={() => props.focus(props.id)}
-      className={`overflow-hidden ${round} ${border} shadow-lg shadow-black/30 ${minimized}`}
+      className={`overflow-hidden ${round} ${border} shadow-lg shadow-purple/30 ${minimized}`}
       id={`window-${props.id}`}
     >
       <div
-        className="window-bar relative h-6 text-center bg-c-200"
+        className="window-bar relative h-6 text-center bg-purple-200"
         onDoubleClick={() => !disableMax && props.setMax(props.id)}
       >
         <TrafficLights

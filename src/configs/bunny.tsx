@@ -1,6 +1,6 @@
-import type { BearData } from "~/types";
+import type { BunnyData } from "~/types";
 
-const bear: BearData[] = [
+const bunny: BunnyData[] = [
   {
     id: "profile",
     title: "Profile",
@@ -158,4 +158,4 @@ const bear: BearData[] = [
   }
 ];
 
-export default bear;
+export default bunny;

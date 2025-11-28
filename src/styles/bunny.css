@@ -1,0 +1,128 @@
+.bunny .markdown a {
+  @apply text-red-500 dark:text-red-400;
+}
+
+.bunny .markdown h1,
+.bunny .markdown h2,
+.bunny .markdown h3,
+.bunny .markdown h4 {
+  @apply font-bold relative text-c-800;
+}
+
+.bunny .markdown h1,
+.bunny .markdown h2,
+.bunny .markdown h3,
+.bunny .markdown h4 {
+  @apply mt-7;
+}
+
+.bunny .markdown h1::before,
+.bunny .markdown h2::before,
+.bunny .markdown h3::before,
+.bunny .markdown h4::before {
+  @apply absolute text-sm text-c-400 -left-7 bottom-1;
+}
+
+.bunny .markdown h1 {
+  @apply text-3xl;
+}
+
+.bunny .markdown h1::before {
+  content: "H1";
+}
+
+.bunny .markdown h2 {
+  @apply text-2xl;
+}
+
+.bunny .markdown h2::before {
+  content: "H2";
+}
+
+.bunny .markdown h3 {
+  @apply text-xl;
+}
+
+.bunny .markdown h3::before {
+  content: "H3";
+}
+
+.bunny .markdown h3 {
+  @apply text-xl;
+}
+
+.bunny .markdown h4 {
+  @apply text-lg;
+}
+
+.bunny .markdown h4::before {
+  content: "H4";
+}
+
+.bunny .markdown p {
+  @apply mt-6;
+}
+
+.bunny .markdown h2 + p,
+.bunny .markdown h3 + p,
+.bunny .markdown h4 + p {
+  @apply mt-4;
+}
+
+.bunny .markdown ul,
+.bunny .markdown ol {
+  @apply mt-2 pl-5;
+}
+
+.bunny .markdown ul {
+  @apply list-disc;
+}
+
+.bunny .markdown ul > li::marker {
+  @apply text-red-500 dark:text-red-400;
+}
+
+.bunny .markdown ol {
+  @apply list-decimal;
+}
+
+.bunny .markdown li p {
+  @apply m-0 mb-2;
+}
+
+.bunny .markdown code {
+  @apply text-sm border border-c-300 rounded py-0.5 px-1 bg-c-50;
+}
+
+.bunny .markdown pre {
+  @apply mt-2 text-sm;
+}
+
+.bunny .markdown pre code {
+  @apply text-sm bg-transparent border-none p-0;
+}
+
+.bunny .markdown pre div {
+  @apply border border-c-300 rounded;
+}
+
+.bunny .markdown .token {
+	background: transparent !important;
+}
+
+.bunny .markdown img {
+  @apply inline-block;
+}
+
+.bunny .markdown table {
+  @apply mt-4 block w-full overflow-auto;
+}
+
+.bunny .markdown table td,
+.bunny .markdown table th {
+  @apply px-3 py-2 border border-c-300;
+}
+
+.bunny .markdown table tr {
+  @apply border-t border-gray-300 bg-transparent;
+}

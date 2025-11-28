@@ -9,15 +9,15 @@ const apps: AppsData[] = [
     img: "img/icons/launchpad.png"
   },
   {
-    id: "bear",
-    title: "Bear",
+    id: "bunny",
+    title: "Bunny",
     desktop: true,
     width: 860,
     height: 500,
     show: true,
     y: -40,
-    img: "img/icons/bear.png",
-    content: <Bear />
+    img: "img/icons/bunny.png",
+    content: <Bunny />
   },
   {
     id: "typora",
@@ -79,10 +79,10 @@ const apps: AppsData[] = [
     img: "img/icons/github.png",
     link: "https://github.com/Renovamen/playground-macos"
   },
-{
-  id: "networx",
-  title: "NETWORX",
-  desktop: true,
+  {
+    id: "networx",
+    title: "NETWORX",
+    desktop: true,
     img: "img/icons/facetime.png",
     width: 500 * 1.7,
     height: 500 + appBarHeight,
@@ -92,7 +92,7 @@ const apps: AppsData[] = [
     x: -80,
     y: 20,
     content: <NetWorx />
-}
+  }
 ];
 
 export default apps;

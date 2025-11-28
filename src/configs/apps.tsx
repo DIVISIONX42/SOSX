@@ -78,7 +78,19 @@ const apps: AppsData[] = [
     desktop: false,
     img: "img/icons/github.png",
     link: "https://github.com/Renovamen/playground-macos"
-  }
+  },
+    id: "network",
+    title: "NETWORX",
+    desktop: false,
+    img: "img/icons/network.png",
+    width: 500 * 1.7,
+    height: 500 + appBarHeight,
+    minWidth: 350 * 1.7,
+    minHeight: 350 + appBarHeight,
+    aspectRatio: 1.7,
+    x: -80,
+    y: 20,
+    content: <NetWorx />  }
 ];
 
 export default apps;

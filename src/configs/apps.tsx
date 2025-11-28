@@ -82,11 +82,16 @@ const apps: AppsData[] = [
 {
   id: "networx",
   title: "NETWORX",
-  desktop: false,
-  icon: "xxx",
-  width: 800,
-  height: 600,
-  link: "https://x42.EU"
+  desktop: true,
+    img: "img/icons/facetime.png",
+    width: 500 * 1.7,
+    height: 500 + appBarHeight,
+    minWidth: 350 * 1.7,
+    minHeight: 350 + appBarHeight,
+    aspectRatio: 1.7,
+    x: -80,
+    y: 20,
+    content: <NetWorx />
 }
 ];
 

@@ -79,7 +79,7 @@ const apps: AppsData[] = [
     img: "img/icons/github.png",
     link: "https://github.com/Renovamen/playground-macos"
   },
-    id: "network",
+    id: "networx",
     title: "NETWORX",
     desktop: false,
     img: "img/icons/network.png",

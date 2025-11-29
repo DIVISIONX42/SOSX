@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { jsPDF } from "jspdf";
 
-// Simple IndexedDB helper (promise-based)
+// ---------- IndexedDB helpers ----------
 const DB_NAME = "simos-notes-db";
 const DB_STORE = "media";
 
@@ -48,18 +48,17 @@ async function idbDelete(key: string) {
   });
 }
 
-// Types
+// ---------- Types ----------
 type Note = {
   id: string;
   title: string;
-  content: string; // markdown / plain text
+  content: string;
   attachments?: { id: string; type: string; name?: string }[];
   updatedAt: number;
 };
 
-// Utils
+// ---------- Utils ----------
 const uid = (prefix = "") => prefix + Math.random().toString(36).slice(2, 9);
-
 const STORAGE_KEY = "simos-notes-v1";
 
 function loadNotes(): Note[] {
@@ -76,7 +75,19 @@ function saveNotes(notes: Note[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
 }
 
-// Main Notepad component
+function blobToDataURL(blob: Blob): Promise<string> {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.readAsDataURL(blob);
+  });
+}
+
+function escapeHtml(s: string) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// ---------- Main Notepad Component ----------
 export default function NotepadApp() {
   const [notes, setNotes] = useState<Note[]>(() => {
     const existing = loadNotes();
@@ -100,12 +111,11 @@ export default function NotepadApp() {
   const [search, setSearch] = useState("");
   const editorRef = useRef<HTMLTextAreaElement | null>(null);
 
-  // Keep notes synced to localStorage
-  useEffect(() => {
-    saveNotes(notes);
-  }, [notes]);
+  const activeNote = notes.find((n) => n.id === activeId) ?? notes[0];
 
-  // Autosave interval
+  // ---------- Effects ----------
+  useEffect(() => saveNotes(notes), [notes]);
+
   useEffect(() => {
     if (!autosaveOn) return;
     const id = setInterval(() => {
@@ -116,8 +126,7 @@ export default function NotepadApp() {
     return () => clearInterval(id);
   }, [autosaveOn, activeId]);
 
-  const activeNote = notes.find((n) => n.id === activeId) ?? notes[0];
-
+  // ---------- Note Management ----------
   function newNote() {
     const n: Note = {
       id: uid("note-"),
@@ -147,7 +156,7 @@ export default function NotepadApp() {
   function renameActive(newTitle: string) {
     setNotes((s) => s.map((n) => (n.id === activeId ? { ...n, title: newTitle } : n)));
   }
-  // ---------- Upload previous notes ----------
+
   function uploadNotes(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -165,7 +174,7 @@ export default function NotepadApp() {
     e.currentTarget.value = "";
   }
 
-  // Export text
+  // ---------- Exports ----------
   function exportTxt(note: Note) {
     const blob = new Blob([note.content], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
@@ -176,12 +185,8 @@ export default function NotepadApp() {
     URL.revokeObjectURL(url);
   }
 
-  // Export HTML
-  // ---------- Fix exportHtml to include attachments ----------
   async function exportHtml(note: Note) {
     let html = escapeHtml(note.content).replace(/\n/g, "<br/>");
-
-    // replace id:... links with inline data URLs
     if (note.attachments?.length) {
       for (const att of note.attachments) {
         const val = await idbGet(att.id);
@@ -190,16 +195,25 @@ export default function NotepadApp() {
         if (val instanceof Blob) dataUrl = await blobToDataURL(val);
         else if (typeof val === "string") dataUrl = val;
 
-        // replace in content
         if (att.type.startsWith("image/")) {
           html = html.replace(
             new RegExp(`!\\[.*?\\]\\(id:${att.id}\\)`, "g"),
-            `<img src="${dataUrl}" alt="${att.name || ""}" />`
+            `<img src="${dataUrl}" alt="${att.name || ""}" style="max-width:100%;"/>`
           );
         } else if (att.type.startsWith("video/")) {
           html = html.replace(
             new RegExp(`!\\[.*?\\]\\(id:${att.id}\\)`, "g"),
-            `<video controls src="${dataUrl}"></video>`
+            `<video controls src="${dataUrl}" style="max-width:100%;"></video>`
+          );
+        } else if (att.type.startsWith("audio/")) {
+          html = html.replace(
+            new RegExp(`!\\[.*?\\]\\(id:${att.id}\\)`, "g"),
+            `<audio controls src="${dataUrl}"></audio>`
+          );
+        } else {
+          html = html.replace(
+            new RegExp(`\\[${att.name}\\]\\(id:${att.id}\\)`, "g"),
+            `<a href="${dataUrl}" download="${att.name || "file"}">${att.name}</a>`
           );
         }
       }
@@ -215,37 +229,57 @@ export default function NotepadApp() {
     URL.revokeObjectURL(url);
   }
 
-  // Helper to convert Blob -> DataURL
-  function blobToDataURL(blob: Blob): Promise<string> {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result as string);
-      reader.readAsDataURL(blob);
-    });
-  }
-
-
-
-  // Export PDF (A4, 2cm margins)
   async function exportPdf(note: Note) {
     const doc = new jsPDF({ unit: "mm", format: "a4" });
-    const margin = 20; // 2 cm = 20 mm
+    const margin = 20;
     const pageWidth = doc.internal.pageSize.getWidth() - margin * 2;
-    const lines = doc.splitTextToSize(note.content, pageWidth);
+    const pageHeight = doc.internal.pageSize.getHeight();
     let cursorY = margin;
     const lineHeight = 7;
+
+    const lines = doc.splitTextToSize(
+      note.content.replace(/!\[.*?\]\(id:.*?\)/g, ""),
+      pageWidth
+    );
     for (const line of lines) {
-      if (cursorY > doc.internal.pageSize.getHeight() - margin) {
+      if (cursorY > pageHeight - margin) {
         doc.addPage();
         cursorY = margin;
       }
       doc.text(line, margin, cursorY);
       cursorY += lineHeight;
     }
+
+    if (note.attachments?.length) {
+      for (const att of note.attachments) {
+        if (!att.type.startsWith("image/")) continue;
+        const val = await idbGet(att.id);
+        if (!val) continue;
+        let dataUrl = "";
+        if (val instanceof Blob) dataUrl = await blobToDataURL(val);
+        else if (typeof val === "string") dataUrl = val;
+
+        const img = new Image();
+        img.src = dataUrl;
+        await new Promise((res) => (img.onload = res));
+
+        const ratio = img.width / img.height;
+        const imgWidth = Math.min(pageWidth, img.width / 2);
+        const imgHeight = imgWidth / ratio;
+
+        if (cursorY + imgHeight > pageHeight - margin) {
+          doc.addPage();
+          cursorY = margin;
+        }
+
+        doc.addImage(img, "PNG", margin, cursorY, imgWidth, imgHeight);
+        cursorY += imgHeight + 5;
+      }
+    }
+
     doc.save(`${note.title || "note"}.pdf`);
   }
 
-  // Print (opens print dialog with note html)
   function printNote(note: Note) {
     const w = window.open("", "_blank");
     if (!w) return;
@@ -256,11 +290,7 @@ export default function NotepadApp() {
     w.print();
   }
 
-  function escapeHtml(s: string) {
-    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
-
-  // Drag & drop files on the editor to attach
+  // ---------- Drag & Drop / Attachments ----------
   async function handleDrop(e: React.DragEvent) {
     e.preventDefault();
     const files = Array.from(e.dataTransfer.files);
@@ -283,35 +313,30 @@ export default function NotepadApp() {
       );
     }
   }
-
   function allowDrop(e: React.DragEvent) {
     e.preventDefault();
   }
 
   function insertAtCursor(text: string) {
-  if (!editorRef.current) return;
-  const textarea = editorRef.current;
-  const start = textarea.selectionStart;
-  const end = textarea.selectionEnd;
-  const before = textarea.value.substring(0, start);
-  const after = textarea.value.substring(end);
-  const newContent = before + text + after;
-  updateActiveContent(newContent);
-  setTimeout(() => {
-    textarea.selectionStart = textarea.selectionEnd = start + text.length;
-    textarea.focus();
-  }, 10);
-}
+    if (!editorRef.current) return;
+    const textarea = editorRef.current;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const before = textarea.value.substring(0, start);
+    const after = textarea.value.substring(end);
+    const newContent = before + text + after;
+    updateActiveContent(newContent);
+    setTimeout(() => {
+      textarea.selectionStart = textarea.selectionEnd = start + text.length;
+      textarea.focus();
+    }, 10);
+  }
 
-
-  // Insert image inline as markdown (data URL)
   async function insertImageFile(file: File) {
     const reader = new FileReader();
     reader.onload = async () => {
       const data = reader.result as string;
-      // Save blob to idb and add attachment entry
       const id = uid("att-");
-      // convert dataURL to blob
       const arr = data.split(",");
       const mime = arr[0].match(/:(.*?);/)?.[1] || "image/png";
       const bstr = atob(arr[1]);
@@ -339,7 +364,6 @@ export default function NotepadApp() {
     reader.readAsDataURL(file);
   }
 
-  // Attach via file picker
   async function onFileInput(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
     if (!f) return;
@@ -365,7 +389,6 @@ export default function NotepadApp() {
     e.currentTarget.value = "";
   }
 
-  // Load attachment URL
   async function getAttachmentUrl(attId: string) {
     const val = await idbGet(attId);
     if (!val) return null;
@@ -374,7 +397,7 @@ export default function NotepadApp() {
     return null;
   }
 
-  // Simple media recorder (audio/video)
+  // ---------- Media Recorder ----------
   const mediaChunksRef = useRef<BlobPart[]>([]);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [recording, setRecording] = useState(false);
@@ -401,18 +424,13 @@ export default function NotepadApp() {
                   ...n,
                   attachments: [
                     ...(n.attachments || []),
-                    {
-                      id,
-                      type: blob.type,
-                      name: `${recordType}-${Date.now()}.${recordType === "audio" ? "webm" : "webm"}`
-                    }
+                    { id, type: blob.type, name: `${recordType}-${Date.now()}.webm` }
                   ],
                   updatedAt: Date.now()
                 }
               : n
           )
         );
-        // stop tracks
         stream.getTracks().forEach((t) => t.stop());
       };
       mediaRecorderRef.current = mr;
@@ -429,8 +447,7 @@ export default function NotepadApp() {
     setRecording(false);
   }
 
-  // Small image editor: apply CSS filters and overlay text; saves edited image to idb
-  // ---------- Fix editImage to update content ----------
+  // ---------- Image Editor ----------
   async function editImage(
     attId: string,
     { brightness = 1, hue = 0, overlay = "" } = {}
@@ -458,7 +475,6 @@ export default function NotepadApp() {
     if (!blob) return;
     const newId = uid("att-");
     await idbPut(newId, blob);
-    // Update attachment list and content markdown
     setNotes((s) =>
       s.map((n) =>
         n.id === activeId
@@ -479,7 +495,6 @@ export default function NotepadApp() {
     );
   }
 
-  // Helper to render attachment preview/controls
   function AttachmentItem({ att }: { att: { id: string; type: string; name?: string } }) {
     const [url, setUrl] = useState<string | null>(null);
     useEffect(() => {
@@ -495,30 +510,41 @@ export default function NotepadApp() {
     }, [att.id]);
 
     if (!url) return <div className="p-2">Loading...</div>;
- {att.type.startsWith("image/") && (
-  <div className="p-2">
-    <img src={url} alt={att.name} style={{ maxWidth: "300px", maxHeight: "200px" }} />
-    <div className="flex gap-2 mt-2">
-      <button
-        onClick={() =>
-          editImage(att.id, { brightness: 1.2, hue: 20, overlay: "Burning Bunny" })
-        }
-        className="px-2 py-1 bg-yellow-600 rounded"
-      >
-        Burn
-      </button>
-      <button
-        onClick={() => insertAtCursor(`![${att.name}](id:${att.id})\n`)}
-        className="px-2 py-1 bg-green-600 rounded text-white"
-      >
-        Apply
-      </button>
-      <a href={url} download={att.name || "image.png"} className="px-2 py-1 bg-blue-600 rounded text-white">
-        Download
-      </a>
-    </div>
-  </div>
-)}
+
+    if (att.type.startsWith("image/")) {
+      return (
+        <div className="p-2">
+          <img
+            src={url}
+            alt={att.name}
+            style={{ maxWidth: "300px", maxHeight: "200px" }}
+          />
+          <div className="flex gap-2 mt-2">
+            <button
+              onClick={() =>
+                editImage(att.id, { brightness: 1.2, hue: 20, overlay: "Burning Bunny" })
+              }
+              className="px-2 py-1 bg-yellow-600 rounded"
+            >
+              Burn
+            </button>
+            <button
+              onClick={() => insertAtCursor(`![${att.name}](id:${att.id})\n`)}
+              className="px-2 py-1 bg-green-600 rounded text-white"
+            >
+              Apply
+            </button>
+            <a
+              href={url}
+              download={att.name || "image.png"}
+              className="px-2 py-1 bg-blue-600 rounded text-white"
+            >
+              Download
+            </a>
+          </div>
+        </div>
+      );
+    }
 
     if (att.type.startsWith("video/")) {
       return (
@@ -534,6 +560,7 @@ export default function NotepadApp() {
         </div>
       );
     }
+
     if (att.type.startsWith("audio/")) {
       return (
         <div className="p-2">
@@ -548,6 +575,7 @@ export default function NotepadApp() {
         </div>
       );
     }
+
     return (
       <div className="p-2">
         <a href={url} download={att.name || "file"} className="text-blue-400">
@@ -557,7 +585,7 @@ export default function NotepadApp() {
     );
   }
 
-  // Render
+  // ---------- Render ----------
   return (
     <div className="w-full h-full flex bg-neutral-900 text-white overflow-hidden">
       {/* Sidebar */}
@@ -576,14 +604,12 @@ export default function NotepadApp() {
             </button>
           </div>
         </div>
-
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search..."
           className="px-2 py-1 bg-neutral-700 rounded"
         />
-
         <div className="flex-1 overflow-auto mt-2 space-y-1">
           {notes
             .filter(
@@ -655,7 +681,6 @@ export default function NotepadApp() {
               </div>
             ))}
         </div>
-
         <div className="pt-2 border-t border-neutral-700">
           <input type="file" onChange={onFileInput} />
           <div className="mt-2 flex gap-2">
@@ -714,9 +739,7 @@ export default function NotepadApp() {
               Print
             </button>
             <button
-              onClick={() => {
-                navigator.clipboard.writeText(activeNote.content);
-              }}
+              onClick={() => navigator.clipboard.writeText(activeNote.content)}
               className="px-2 py-1 bg-neutral-700 rounded"
             >
               Copy
@@ -725,7 +748,6 @@ export default function NotepadApp() {
         </div>
 
         <div className="flex-1 flex">
-          
           <textarea
             ref={editorRef}
             value={activeNote?.content || ""}
@@ -734,7 +756,6 @@ export default function NotepadApp() {
           />
         </div>
 
-        {/* attachments area */}
         <div className="p-3 border-t border-neutral-800 flex gap-3 overflow-auto">
           {(activeNote?.attachments || []).map((att) => (
             <div key={att.id} className="bg-neutral-800 rounded p-2">

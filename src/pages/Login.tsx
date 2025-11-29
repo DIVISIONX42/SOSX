@@ -2,6 +2,7 @@ import React from "react";
 import { wallpapers, user } from "~/configs";
 import type { MacActions } from "~/types";
 
+
 export default function Login(props: MacActions) {
   const [password, setPassword] = useState("");
   const [sign, setSign] = useState("Click to enter");

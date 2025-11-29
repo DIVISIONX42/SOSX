@@ -258,6 +258,88 @@ export default function Desktop(props: MacActions) {
       {/* Desktop Apps */}
       <div className="window-bound z-10 absolute" style={{ top: minMarginY }}>
         {renderAppWindows()}
+
+        <div style=""
+    /* background: #ff780036; */
+    display: flex;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(1.092rem);
+"><div class="folder" style="
+    margin: 3rem 3rem;
+    top: 0%;
+    position: absolute;
+    left: 33%;
+    right: 0;
+    /* transform: skew(-3.5deg, -3.5deg) scale3d(1.1, 1.25, 1.1); */
+    transition-delay: 2.3s;
+    /* transform-style: preserve-3d; */
+    /* transform: skew(-3.5deg, -3.5deg) scale3d(1.1, 1.25, 1.1); */
+    /* transition-delay: 2.3s; */
+    /* transform-style: preserve-3d; */
+"><button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" style="
+    width: 5.5rem;
+    height: 4.2rem;
+    /* margin: 3rem 3rem; */
+    /* top: 0%; */
+    /* position: absolute; */
+    /* left: 33%; */
+    /* right: 0; */
+    background: linear-gradient(42deg, #884806, #ceb41da8);
+    border-top,: .07rem solid orangered;
+    border-radius: .23rem;
+    border-bottom: .077rem solid orangered;
+    border-left: .077rem solid orangered;
+    border-top: .033rem solid orangered;
+    border-right: .042rem solid orangered;
+    transform: skew(-3.5deg, -3.5deg) scale3d(1.1, 1.25, 1.1);
+    transition-delay: 2.3s;
+    transform-style: preserve-3d;
+">0
+</button>
+<p class="tooltip absolute inset-x-0 w-max rounded-md bg-c-300/80" p="x-3 y-1" text="sm c-black" style="
+    /* left: 35%; */
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    /* justify-self: center; */
+    text-align: center;
+    background: linear-gradient(42deg, #f9f9c6e6, #ebb03873);
+    border: 0.07rem solid orange;
+    font-family: monospace;
+    color: orangered;
+    font-weight: bold;
+    font: icon;
+    transform: skew(-3.5deg, -3.5deg) scale3d(1, 1, 1);
+    transition-delay: 2.3s;
+    transform-style: preserve-3d;
+    outline-style: 1rem solid red;
+">Folder</p>
+<button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" style="
+    width: 5.5rem;
+    height: 4.2rem;
+    /* margin: 3rem 3rem; */
+    /* top: 0%; */
+    /* position: absolute; */
+    /* left: 33%; */
+    /* right: 0; */
+    background: linear-gradient(42deg, #884806, #ceb41da8);
+    border-top,: .07rem solid orangered;
+    border-radius: .23rem;
+    border-bottom: .077rem solid orangered;
+    border-left: .077rem solid orangered;
+    border-top: .033rem solid orangered;
+    border-right: .042rem solid orangered;
+    transform: skew(-3.5deg, -3.5deg) scale3d(1.1, 1.25, 1.1);
+    transition-delay: 2.3s;
+    transform-style: preserve-3d;
+">0
+</button>
+    
+</div></div>
+
       </div>
 
       {/* Spotlight */}

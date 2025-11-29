@@ -259,7 +259,7 @@ export default function Desktop(props: MacActions) {
       <div className="window-bound z-10 absolute" style={{ top: minMarginY }}>
         {renderAppWindows()}
 
-        <div style=""
+        <div style="
     /* background: #ff780036; */
     display: flex;
     width: 100%;

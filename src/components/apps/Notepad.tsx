@@ -320,7 +320,9 @@ export default function Notepad() {
   async function exportHtml(note: Note) {
     let html = note.html;
     // Find all id:... occurrences for images/videos/audio
-    const idMatches = Array.from(html.matchAll(/src="id:([^"]+)"/g)).map((m) => m[1]);
+const idMatches = Array.from(
+  html.matchAll(/src="id:([^"]+)"/g)
+).map((m) => m[1]);
     const unique = Array.from(new Set(idMatches));
     for (const attId of unique) {
       const val = await idbGet(attId);

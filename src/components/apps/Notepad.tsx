@@ -654,14 +654,6 @@ export default function NotepadApp() {
             onChange={(e) => updateActiveContent(e.target.value)}
             className="w-1/2 p-4 bg-neutral-900 text-white outline-none resize-none"
           />
-
-          <div className="w-1/2 p-4 overflow-auto bg-neutral-950">
-            {preview === "edit" ? null : (
-              <div className="prose max-w-none text-white">
-                <ReactMarkdown>{activeNote?.content || ""}</ReactMarkdown>
-              </div>
-            )}
-          </div>
         </div>
 
         {/* attachments area */}

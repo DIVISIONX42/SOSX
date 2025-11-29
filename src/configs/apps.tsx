@@ -92,6 +92,15 @@ const apps: AppsData[] = [
     x: -80,
     y: 20,
     content: <NetWorx />
+  },
+  {
+    id: "notepad",
+    title: "Notepad",
+    desktop: true,
+    width: 600,
+    height: 500,
+    img: "img/icons/notepad.png", // add an icon
+    content: <Notepad />
   }
 ];
 

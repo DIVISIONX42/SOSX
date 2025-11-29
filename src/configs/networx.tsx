@@ -1,6 +1,6 @@
 import type { TerminalData } from "~/types";
 
-const networx: TerminalData[] = [
+const networx: NetWorxData[] = [
   {
     id: "about",
     title: "about",

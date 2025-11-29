@@ -224,6 +224,8 @@ export default function NotepadApp() {
     });
   }
 
+
+
   // Export PDF (A4, 2cm margins)
   async function exportPdf(note: Note) {
     const doc = new jsPDF({ unit: "mm", format: "a4" });
@@ -287,19 +289,20 @@ export default function NotepadApp() {
   }
 
   function insertAtCursor(text: string) {
-    if (!editorRef.current) return;
-    const textarea = editorRef.current;
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const before = textarea.value.substring(0, start);
-    const after = textarea.value.substring(end);
-    const newContent = before + text + after;
-    updateActiveContent(newContent);
-    setTimeout(() => {
-      textarea.selectionStart = textarea.selectionEnd = start + text.length;
-      textarea.focus();
-    }, 10);
-  }
+  if (!editorRef.current) return;
+  const textarea = editorRef.current;
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const before = textarea.value.substring(0, start);
+  const after = textarea.value.substring(end);
+  const newContent = before + text + after;
+  updateActiveContent(newContent);
+  setTimeout(() => {
+    textarea.selectionStart = textarea.selectionEnd = start + text.length;
+    textarea.focus();
+  }, 10);
+}
+
 
   // Insert image inline as markdown (data URL)
   async function insertImageFile(file: File) {
@@ -492,40 +495,30 @@ export default function NotepadApp() {
     }, [att.id]);
 
     if (!url) return <div className="p-2">Loading...</div>;
-    {
-      att.type.startsWith("image/") && (
-        <div className="p-2">
-          <img
-            src={url}
-            alt={att.name}
-            style={{ maxWidth: "300px", maxHeight: "200px" }}
-          />
-          <div className="flex gap-2 mt-2">
-            <button
-              onClick={() =>
-                editImage(att.id, { brightness: 1.2, hue: 20, overlay: "Burning Bunny" })
-              }
-              className="px-2 py-1 bg-yellow-600 rounded"
-            >
-              Burn
-            </button>
-            <button
-              onClick={() => insertAtCursor(`![${att.name}](id:${att.id})\n`)}
-              className="px-2 py-1 bg-green-600 rounded text-white"
-            >
-              Apply
-            </button>
-            <a
-              href={url}
-              download={att.name || "image.png"}
-              className="px-2 py-1 bg-blue-600 rounded text-white"
-            >
-              Download
-            </a>
-          </div>
-        </div>
-      );
-    }
+ {att.type.startsWith("image/") && (
+  <div className="p-2">
+    <img src={url} alt={att.name} style={{ maxWidth: "300px", maxHeight: "200px" }} />
+    <div className="flex gap-2 mt-2">
+      <button
+        onClick={() =>
+          editImage(att.id, { brightness: 1.2, hue: 20, overlay: "Burning Bunny" })
+        }
+        className="px-2 py-1 bg-yellow-600 rounded"
+      >
+        Burn
+      </button>
+      <button
+        onClick={() => insertAtCursor(`![${att.name}](id:${att.id})\n`)}
+        className="px-2 py-1 bg-green-600 rounded text-white"
+      >
+        Apply
+      </button>
+      <a href={url} download={att.name || "image.png"} className="px-2 py-1 bg-blue-600 rounded text-white">
+        Download
+      </a>
+    </div>
+  </div>
+)}
 
     if (att.type.startsWith("video/")) {
       return (
@@ -732,6 +725,7 @@ export default function NotepadApp() {
         </div>
 
         <div className="flex-1 flex">
+          
           <textarea
             ref={editorRef}
             value={activeNote?.content || ""}

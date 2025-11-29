@@ -147,6 +147,23 @@ export default function NotepadApp() {
   function renameActive(newTitle: string) {
     setNotes((s) => s.map((n) => (n.id === activeId ? { ...n, title: newTitle } : n)));
   }
+  // ---------- Upload previous notes ----------
+  function uploadNotes(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const uploadedNotes: Note[] = JSON.parse(reader.result as string);
+        setNotes((s) => [...uploadedNotes, ...s]);
+        alert("Notes uploaded successfully!");
+      } catch (err) {
+        alert("Invalid file format");
+      }
+    };
+    reader.readAsText(file);
+    e.currentTarget.value = "";
+  }
 
   // Export text
   function exportTxt(note: Note) {
@@ -160,15 +177,56 @@ export default function NotepadApp() {
   }
 
   // Export HTML
-  function exportHtml(note: Note) {
-    const html = `<!doctype html><html><head><meta charset="utf-8"><title>${note.title}</title></head><body>${note.content.replace(/\n/g, "<br/>")}</body></html>`;
-    const blob = new Blob([html], { type: "text/html" });
+  // ---------- Fix exportHtml to include attachments ----------
+  async function exportHtml(note: Note) {
+    let html = escapeHtml(note.content).replace(/\n/g, "<br/>");
+
+    // replace id:... links with inline data URLs
+    if (note.attachments?.length) {
+      for (const att of note.attachments) {
+        const val = await idbGet(att.id);
+        if (!val) continue;
+        let dataUrl = "";
+        if (val instanceof Blob) dataUrl = await blobToDataURL(val);
+        else if (typeof val === "string") dataUrl = val;
+
+        // replace in content
+        if (att.type.startsWith("image/")) {
+          html = html.replace(
+            new RegExp(`!\\[.*?\\]\\(id:${att.id}\\)`, "g"),
+            `<img src="${dataUrl}" alt="${att.name || ""}" />`
+          );
+        } else if (att.type.startsWith("video/")) {
+          html = html.replace(
+            new RegExp(`!\\[.*?\\]\\(id:${att.id}\\)`, "g"),
+            `<video controls src="${dataUrl}"></video>`
+          );
+        }
+      }
+    }
+
+    const full = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${note.title}</title></head><body>${html}</body></html>`;
+    const blob = new Blob([full], { type: "text/html" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
     a.download = `${note.title || "note"}.html`;
     a.click();
     URL.revokeObjectURL(url);
+  }
+
+  // Helper to convert Blob -> DataURL
+  function blobToDataURL(blob: Blob): Promise<string> {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  // Escape HTML helper
+  function escapeHtml(s: string) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
   // Export PDF (A4, 2cm margins)
@@ -359,6 +417,7 @@ export default function NotepadApp() {
   }
 
   // Small image editor: apply CSS filters and overlay text; saves edited image to idb
+  // ---------- Fix editImage to update content ----------
   async function editImage(
     attId: string,
     { brightness = 1, hue = 0, overlay = "" } = {}
@@ -386,7 +445,7 @@ export default function NotepadApp() {
     if (!blob) return;
     const newId = uid("att-");
     await idbPut(newId, blob);
-    // replace attachment in note
+    // Update attachment list and content markdown
     setNotes((s) =>
       s.map((n) =>
         n.id === activeId
@@ -396,6 +455,10 @@ export default function NotepadApp() {
                 ...(n.attachments || []),
                 { id: newId, type: "image/png", name: "edited.png" }
               ],
+              content: n.content.replace(
+                new RegExp(`!\\[.*?\\]\\(id:${attId}\\)`),
+                `![edited.png](id:${newId})`
+              ),
               updatedAt: Date.now()
             }
           : n

@@ -2,7 +2,6 @@ import React from "react";
 import { wallpapers, user } from "~/configs";
 import type { MacActions } from "~/types";
 
-
 export default function Login(props: MacActions) {
   const [password, setPassword] = useState("");
   const [sign, setSign] = useState("Click to enter");
@@ -53,7 +52,7 @@ export default function Login(props: MacActions) {
           <input
             className="text-sm text-white col-start-1 col-span-4 no-outline bg-transparent px-2"
             type="password"
-            placeholder="Enter Password"
+            placeholder="Ent Password"
             onClick={(e) => e.stopPropagation()}
             onKeyDown={keyPress}
             value={password}

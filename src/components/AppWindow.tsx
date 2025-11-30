@@ -102,6 +102,11 @@ const TrafficLights = ({ id, close, aspectRatio, max, setMax, setMin }: TrafficP
     </div>
   );
 };
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js");
+  });
+}
 
 const Window = (props: WindowProps) => {
   const dockSize = useStore((state) => state.dockSize);

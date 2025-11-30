@@ -1,6 +1,20 @@
+# 🐦‍🔥✖️🐇 BurningXBunny
+
+This playground is a hidden S.0.S. 3 the world ~ [505](https://sim-os.vercel.app/)
+
+Powered by [React](https://reactjs.org/) + [Zustand](https://zustand-demo.pmnd.rs/) + [UnoCSS](https://uno.antfu.me/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/).
+
+![light mode](./public/screenshots/light.png)
+![dark mode](./public/screenshots/dark.png)
+
+
+&nbsp;
+
+©️honor 2 hero OC🫆
+
 # playground-macos
 
-This portfolio website simulating macOS's GUI: [https://portfolio.zxh.me](https://sim-os.vercel.app/)
+This portfolio website simulating macOS's GUI: [https://portfolio.zxh.me]
 
 Powered by [React](https://reactjs.org/) + [Zustand](https://zustand-demo.pmnd.rs/) + [UnoCSS](https://uno.antfu.me/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/).
 

@@ -4,8 +4,8 @@ This playground is a hidden S.0.S. 3 the world ~ [505](https://sim-os.vercel.app
 
 Powered by [React](https://reactjs.org/) + [Zustand](https://zustand-demo.pmnd.rs/) + [UnoCSS](https://uno.antfu.me/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/).
 
-![light mode](./public/screenshots/light.png)
-![dark mode](./public/screenshots/dark.png)
+![light mode](./public/screenshots/light.jpg)
+![dark mode](./public/screenshots/dark.jpg)
 
 
 &nbsp;

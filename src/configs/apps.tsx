@@ -95,11 +95,11 @@ const apps: AppsData[] = [
   },
   {
     id: "notepad",
-    title: "Notepad",
+    title: "BunPa",
     desktop: true,
     width: 600,
     height: 500,
-    img: "img/icons/notepad.png", // add an icon
+    img: "img/icons/bunpa.png", // add an icon
     content: <Notepad />
   }
 ];

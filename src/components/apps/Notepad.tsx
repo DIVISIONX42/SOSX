@@ -160,22 +160,19 @@ export default function NotepadApp() {
     return null;
   }
 
-  function insertHTMLAtCursor(html: string) {
-    const sel = window.getSelection();
-    if (!sel || !sel.rangeCount) return;
-    const range = sel.getRangeAt(0);
-    range.deleteContents();
-
-    const temp = document.createElement("div");
-    temp.innerHTML = html;
-    const frag = document.createDocumentFragment();
-    let node;
-    while ((node = temp.firstChild)) frag.appendChild(node);
-
-    range.insertNode(frag);
-    range.collapse(false);
-
-    updateActiveContent(editorRef.current?.innerHTML || "");
+  async function insertAtCursor(text: string) {
+    if (!editorRef.current) return;
+    const textarea = editorRef.current;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const before = textarea.value.substring(0, start);
+    const after = textarea.value.substring(end);
+    const newContent = before + text + after;
+    updateActiveContent(newContent);
+    setTimeout(() => {
+      textarea.selectionStart = textarea.selectionEnd = start + text.length;
+      textarea.focus();
+    }, 10);
   }
 
   async function insertImageFile(file: File) {
@@ -355,35 +352,15 @@ export default function NotepadApp() {
     const pageWidth = doc.internal.pageSize.getWidth() - margin * 2;
     let cursorY = margin;
 
-    const temp = document.createElement("div");
-    temp.innerHTML = note.content;
-
-    for (const el of Array.from(temp.childNodes)) {
-      if (el.nodeType === 3) {
-        const lines = doc.splitTextToSize(el.textContent || "", pageWidth);
-        for (const line of lines) {
-          if (cursorY > doc.internal.pageSize.getHeight() - margin) {
-            doc.addPage();
-            cursorY = margin;
-          }
-          doc.text(line, margin, cursorY);
-          cursorY += lineHeight;
-        }
-      } else if (el.nodeName === "IMG") {
-        const dataUrl = (el as HTMLImageElement).src;
-        const img = new Image();
-        img.src = dataUrl;
-        await new Promise((res) => (img.onload = res));
-        const ratio = img.width / img.height;
-        const imgWidth = pageWidth;
-        const imgHeight = imgWidth / ratio;
-        if (cursorY + imgHeight > doc.internal.pageSize.getHeight() - margin) {
-          doc.addPage();
-          cursorY = margin;
-        }
-        doc.addImage(dataUrl, "PNG", margin, cursorY, imgWidth, imgHeight);
-        cursorY += imgHeight + 5;
+    const lines = doc.splitTextToSize(note.content, pageWidth);
+    const lineHeight = 7;
+    for (const line of lines) {
+      if (cursorY > doc.internal.pageSize.getHeight() - margin) {
+        doc.addPage();
+        cursorY = margin;
       }
+      doc.text(line, margin, cursorY);
+      cursorY += lineHeight;
     }
 
     // Add images at the end
@@ -446,9 +423,7 @@ export default function NotepadApp() {
           />
           <div className="flex gap-2 mt-2">
             <button
-              onClick={() =>
-                insertHTMLAtCursor(`<img src='${url}' class='max-w-full rounded my-2'/>`)
-              }
+              onClick={() => insertAtCursor(`![${att.name}](id:${att.id})\n`)}
               className="px-2 py-1 bg-green-600 rounded text-white"
             >
               Apply
@@ -476,12 +451,6 @@ export default function NotepadApp() {
           >
             Download
           </a>
-          <button
-            onClick={() =>
-              insertHTMLAtCursor(`<img src='${url}' class='max-w-full rounded my-2'/>`)
-            }
-            className="px-2 py-1 bg-green-600 rounded text-white"
-          ></button>
         </div>
       );
 
@@ -496,14 +465,6 @@ export default function NotepadApp() {
           >
             Download
           </a>
-          <button
-            onClick={() =>
-              insertHTMLAtCursor(
-                `<audio controls src='${url}' class='w-full my-2'></audio>`
-              )
-            }
-            className="px-2 py-1 bg-green-600 rounded text-white"
-          ></button>
         </div>
       );
 
@@ -684,17 +645,15 @@ export default function NotepadApp() {
 
         <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
           {/* Text Editor */}
-          <div
+          <textarea
             ref={editorRef}
-            contentEditable
-            suppressContentEditableWarning
-            onInput={(e) => updateActiveContent(e.currentTarget.innerHTML)}
-            className="w-full md:w-1/2 h-60 md:h-auto p-4 bg-neutral-900 text-white outline-none overflow-auto prose prose-invert"
-            dangerouslySetInnerHTML={{ __html: activeNote?.content || "" }}
+            value={(activeNote?.content || "").replace(/!\[.*?\]\(id:att-[^)]+\)/g, "")}
+            onChange={(e) => updateActiveContent(e.target.value)}
+            className="w-full md:w-1/2 h-60 md:h-auto p-4 bg-neutral-900 text-white outline-none resize-none"
           />
 
           {/* Attachments Panel */}
-          <div className="w-full border-t border-neutral-800 p-3 flex overflow-x-auto gap-3 bg-neutral-900">
+          <div className="flex-1 p-3 border-t md:border-t-0 md:border-l border-neutral-800 overflow-auto flex flex-col gap-2 mt-2 md:mt-0 md:ml-2">
             {(activeNote?.attachments || []).map((att) => (
               <div key={att.id} className="bg-neutral-800 rounded p-2 flex-shrink-0">
                 <AttachmentItem att={att} />

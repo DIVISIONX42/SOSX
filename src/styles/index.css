@@ -16,6 +16,8 @@ input, textarea, select {
   -webkit-text-size-adjust: 100%;
 }
 html, body {
+  margin: 0;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -38,4 +40,18 @@ html, body {
   -webkit-overflow-scrolling: touch;
   height: 100%;
   max-height: 100%;
+}
+#desktop {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: calc(var(--vh) * 100);
+  overflow: hidden; /* desktop never scrolls */
+}
+window-content::-webkit-scrollbar {
+  width: 6px;
+}
+window-content::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.4);
+  border-radius: 3px;
 }

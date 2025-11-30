@@ -11,47 +11,54 @@
   border-radius:.7rem;
 }
 */
-input, textarea, select {
-  font-size: 16px; /* prevents mobile zoom on focus */
-  -webkit-text-size-adjust: 100%;
-}
+/* --- GLOBAL STYLES / RESET for mobile behavior --- */
+
 html, body {
   margin: 0;
+  padding: 0;
   height: 100%;
-  overflow: hidden;
+  overflow: hidden;       /* prevent the overall page from scrolling */
 }
 
-#root {
-  overflow: hidden;
+:root {
+  /* for mobile viewport height fix */
+  --vh: 100vh;
 }
 
-.sim-os-app, .desktop-area, .window-wrapper {
-  max-width: 100vw;
-  max-height: 100vh;
-  overflow: hidden;
+#root, #desktop {  /* adjust selectors to your root/desktop container IDs */
+  width: 100vw;
+  height: calc(var(--vh) * 100);
+  overflow: hidden;       /* desktop container fixed, no overflow on the large page */
+  position: relative;
 }
-* {
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
+
+/* Inputs / textareas: prevent mobile zoom on focus and restrict expansion */
+input, textarea, select, button {
+  font-size: 16px !important;       /* avoids iOS auto-zoom on focus */
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
 }
+
+textarea, input {
+  resize: none;        /* prevent manual resize by user */
+  overflow: auto;
+}
+
+/* Define a scrollable container inside each app/window content area */
 .window-content {
   overflow-y: auto;
   overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  height: 100%;
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+  height: 100%;      /* fill window */
   max-height: 100%;
 }
-#desktop {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: calc(var(--vh) * 100);
-  overflow: hidden; /* desktop never scrolls */
-}
-window-content::-webkit-scrollbar {
+
+/* Optional: style scrollbar (for better visibility) */
+.window-content::-webkit-scrollbar {
   width: 6px;
 }
-window-content::-webkit-scrollbar-thumb {
+.window-content::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.4);
   border-radius: 3px;
 }

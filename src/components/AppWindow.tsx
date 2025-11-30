@@ -3,10 +3,7 @@ import { Rnd } from "react-rnd";
 import { minMarginX, minMarginY, appBarHeight } from "~/utils";
 
 function updateVh() {
-  document.documentElement.style.setProperty(
-    '--vh',
-    `${window.innerHeight * 0.01}px`
-  );
+  document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
 }
 updateVh();
 window.addEventListener('resize', updateVh);

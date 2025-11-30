@@ -18,8 +18,8 @@ const colorAttr = (prefix: string, [, color, , opacity]: RegExpMatchArray) => {
     lightColor = color;
     darkColor = color === "white" ? "black" : "white";
   } else {
-    lightColor = `gray-${color}`;
-    darkColor = `gray-${(
+    lightColor = `orangered-${color}`;
+    darkColor = `blue-${(
       (+color === 900 || +color === 50 ? 950 : 900) - +color
     ).toString()}`;
   }

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import FireBunnyBackground from "./FireBunnyBackground";
 import IceBunnyBackground from "./IceBunnyBackground";
+import BunnyPortal from "./BunnyPortal";
 
 /**
  * Use this component at top-level (App) so the background sits behind app UI.
@@ -10,6 +11,20 @@ import IceBunnyBackground from "./IceBunnyBackground";
  * Props:
  *  - theme: "dark" | "light" | undefined  (undefined = follow system)
  */
+export default function BunnyBackgroundProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <BunnyPortal>
+        <div className="bunny-bg-container">
+          {/* your canvases, particles, etc */}
+        </div>
+      </BunnyPortal>
+
+      {children}
+    </>
+  );
+}
+
 export default function BunnyBackgroundProvider({ theme, children }) {
   const [prefersDark, setPrefersDark] = useState(false);
   const [override, setOverride] = useState(theme);

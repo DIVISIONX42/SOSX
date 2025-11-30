@@ -67,3 +67,13 @@
   .bg-root { opacity: 0.95; }
   svg { width: 80vw !important; left: 50% !important; transform: translateX(-50%) !important; }
 }
+.bunny-bg-container {
+  position: fixed;
+  inset: 0;
+  z-index: -9999 !important;
+  pointer-events: none !important;
+
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}

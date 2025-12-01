@@ -1,6 +1,6 @@
 // src/apps/Chat.tsx
 import React, { useEffect, useState, useRef } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabase } from '../../../lib/supabase'
 
 export function Chat({ currentUser }: { currentUser: any }) {
   const [msgs, setMsgs] = useState<any[]>([])

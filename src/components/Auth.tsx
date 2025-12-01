@@ -1,6 +1,6 @@
 // src/components/Auth.tsx
 import React, { useEffect, useState } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabase } from '../../../lib/supabase'
 
 export function Auth({ onUser }: { onUser: (u: any) => void }) {
   const [email, setEmail] = useState('')

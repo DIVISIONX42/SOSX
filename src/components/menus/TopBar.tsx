@@ -13,8 +13,6 @@ interface TopBarItemProps {
   onMouseEnter?: () => void;
 }
 
-const currentUser = useStore((s) => s.currentUser);
-
 const TopBarItem = forwardRef(
   (props: TopBarItemProps, ref: React.ForwardedRef<HTMLDivElement>) => {
     const hide = props.hideOnMobile ? "hidden sm:inline-flex" : "inline-flex";
@@ -66,6 +64,8 @@ interface TopBarState {
 }
 
 const TopBar = (props: TopBarProps) => {
+  const currentUser = useStore((s) => s.currentUser);
+
   const appleBtnRef = useRef<HTMLDivElement>(null);
   const controlCenterBtnRef = useRef<HTMLDivElement>(null);
   const wifiBtnRef = useRef<HTMLDivElement>(null);

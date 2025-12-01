@@ -47,8 +47,19 @@ export default function Login(props: MacActions) {
       onClick={() => loginHandle()}
     >
       <div className="inline-block w-auto relative top-1/2 -mt-40">
-        
-        {/* User selector */}
+
+        {/* Avatar */}
+        <img
+          className="rounded-full size-24 my-0 mx-auto"
+          src={selectedUser.avatar}
+          alt="avatar"
+        />
+
+        <div className="font-semibold mt-2 text-xl text-white">
+          {selectedUser.name}
+        </div>
+
+              {/* User selector */}
         <select
           className="mb-4 px-2 py-1 rounded bg-black/40 text-white text-sm backdrop-blur-lg"
           value={selectedUser.name}
@@ -64,17 +75,6 @@ export default function Login(props: MacActions) {
             </option>
           ))}
         </select>
-
-        {/* Avatar */}
-        <img
-          className="rounded-full size-24 my-0 mx-auto"
-          src={selectedUser.avatar}
-          alt="avatar"
-        />
-
-        <div className="font-semibold mt-2 text-xl text-white">
-          {selectedUser.name}
-        </div>
 
         {/* Password Input */}
         <div className="mx-auto grid grid-cols-5 w-44 h-8 mt-4 rounded-md backdrop-blur-2xl bg-gray-300/50">
@@ -92,7 +92,7 @@ export default function Login(props: MacActions) {
           </div>
         </div>
 
-        <div mt-2 cursor-pointer text="sm gray-200">
+        <div mt-4 cursor-pointer text="sm gray-200">
           {sign}
         </div>
       </div>

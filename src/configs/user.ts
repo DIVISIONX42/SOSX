@@ -4,9 +4,6 @@ const user: UserData = {
   name: "0",
   avatar: "img/ui/avatar.png",
   password: "42"
-  name: "0",
-  avatar: "img/ui/avatar.png",
-  password: "42"
 };
 
 export default user;

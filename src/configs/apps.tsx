@@ -101,6 +101,13 @@ const apps: AppsData[] = [
     desktop: false,
     img: "img/icons/github.png",
     link: "https://github.com/Renovamen/playground-macos"
+  },
+    {
+      id: 'chat-window',
+      title: 'SylverChat',
+      desktop: true,
+    img: "img/icons/github.png",
+      content: <Chat />  
   }
 ];
 

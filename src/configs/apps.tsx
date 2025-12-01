@@ -108,6 +108,13 @@ const apps: AppsData[] = [
       desktop: true,
     img: "img/icons/github.png",
       content: <Chat />  
+  },
+  {
+  id: "chat",
+  title: "Chat",
+  desktop: true,
+  img: "img/icons/github.png",
+  content: <Chat />
   }
 ];
 

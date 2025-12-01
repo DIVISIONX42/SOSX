@@ -22,6 +22,7 @@
     "@milkdown/preset-gfm": "^7.3.6",
     "@milkdown/react": "^7.3.6",
     "@rooks/use-raf": "^4.11.2",
+    "@supabase/supabase-js": "^2.86.0",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.1.7",
     "jsdf": "^0.3.2",

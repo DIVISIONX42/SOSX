@@ -18,9 +18,9 @@
 
 /* ice / cold version */
 .bg-ice {
-    background: radial-gradient(ellipse at center, #07142117, #00060acc 60%);
-    opacity: 0.9;
-  }
+    opacity: .9;
+    z-index: 10000;
+    }
 
 /* animated subtle nebula / glow area */
 .bg-gradient {

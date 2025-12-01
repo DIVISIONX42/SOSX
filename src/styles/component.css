@@ -31,6 +31,7 @@
   height: 200%;
   left: -100%;
   opacity: .9;
+      background: radial-gradient(ellipse at top, #07142117, #00000070);
 }
 
 .innner-window {

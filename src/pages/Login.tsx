@@ -47,21 +47,21 @@ export default function Login(props: MacActions) {
       onClick={() => loginHandle()}
     >
       <div className="inline-block w-auto relative top-1/2 -mt-40">
-
         {/* Avatar */}
         <img
-          className="rounded-full size-24 my-0 mx-auto"
+          className="rounded-full size-42 my-0 mx-auto neon-red-orange"
           src={selectedUser.avatar}
           alt="avatar"
         />
 
-        <div className="font-semibold mt-2 text-xl text-white">
+        {/* User selector */}
+
+        <div className="font-semibold w-7 h-7  items-center justify-self-center justify-center flex self-center text-center  mt-2 text-xl text-white border-purple bg-blue/33 backdrop-blur-4 border-2 rounded-3 relative font-mono text-2xl font-normal leading-tight neon-ice-blue">
           {selectedUser.name}
         </div>
 
-              {/* User selector */}
         <select
-          className="mb-4 w-28 h-28 rounded-full flex items-center justify-center px-2 py-1 bg-black/40 text-white text-sm backdrop-blur-lg shadow-lg ring-0 focus:outline-none focus:ring-4 focus:ring-white/30 transition-transform transform hover:scale-105 active:scale-95"
+          className="m-4.2 w-13 h-13 rounded-full items-center justify-self-center justify-center flex self-center text-center text-2xl p-0  bg-orange/23 text-white text-sm backdrop-blur-4 border-1 border-orange shadow-lg ring-0 focus:outline-none focus:ring- focus:ring-orange/30 transition-transform transform hover:scale-105 active:scale-95"
           value={selectedUser.name}
           onChange={(e) => {
             const u = users.find((u) => u.name === e.target.value);

@@ -65,3 +65,23 @@ textarea, input {
   background: rgba(255,255,255,0.4);
   border-radius: 3px;
 }
+
+@keyframes neon-red-orange {
+  0%, 100% { box-shadow: 0 0 10px #ff4500, 0 0 2px #00c3ff, 0 0 3px #7700ff; }
+  50% { box-shadow: 0 0 20px #ea00ff, 0 0 4px #00fff2, 0 0 6px #b547ff; }
+}
+
+@keyframes neon-ice-blue {
+  0%, 100% { box-shadow: 0 0 5px #ff9900, 0 0 2px #ff4500, 0 0 3px #9600d1; }
+  50% { box-shadow: 0 0 10px #00ffff, 0 0 4px #cc00ff, 0 0 px #3f00d1; }
+}
+
+.neon-red-orange {
+  animation: neon-red-orange 1.5s infinite alternate;
+  border-radius: 999px;
+}
+
+.neon-ice-blue {
+  animation: neon-ice-blue 1.5s infinite alternate;
+  border-radius: 0.5rem;
+}

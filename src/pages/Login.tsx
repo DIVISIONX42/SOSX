@@ -25,13 +25,13 @@ export default function Login(props: MacActions) {
     // Cheat login (your original feature)
     if (password === "42") {
       props.setLogin(true);
-      props.setAppOpen("networx", true);
       return;
     }
 
-    // Multi-user login
+    const setCurrentUser = useStore((s) => s.setCurrentUser);
+
     if (password === selectedUser.password) {
-      setCurrentUser(selectedUser); // store in Zustand
+      setCurrentUser(selectedUser);
       props.setLogin(true);
       return;
     }

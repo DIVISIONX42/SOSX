@@ -15,7 +15,7 @@ const apps: AppsData[] = [
     width: 860,
     height: 500,
     show: true,
-    y: -40,
+    y: -11,
     img: "img/icons/bunny.png",
     content: <Bunny />
   },
@@ -33,22 +33,22 @@ const apps: AppsData[] = [
     title: "NETWORX",
     desktop: true,
     img: "img/icons/networx42.png",
-    width: 500 * 1.7,
-    height: 500 + appBarHeight,
+    width: 90vw,
+    height: 90vh + appBarHeight,
     minWidth: 350 * 1.7,
     minHeight: 350 + appBarHeight,
     aspectRatio: 1.7,
-    x: -80,
+    x: -0,
     y: 20,
     content: <NetWorx />
   },
   {
     id: "typora",
-    title: "Typora",
+    title: "BunNote",
     desktop: true,
-    width: 600,
-    height: 580,
-    y: -20,
+    width: 90vw,
+    height: 90vh,
+    y: -15,
     img: "img/icons/typora.png",
     content: <Typora />
   },
@@ -69,8 +69,8 @@ const apps: AppsData[] = [
     desktop: true,
     width: 900,
     height: 600,
-    x: 80,
-    y: -30,
+    x: 40,
+    y: -10,
     img: "img/icons/vscode.png",
     content: <VSCode />
   },
@@ -84,7 +84,7 @@ const apps: AppsData[] = [
     minWidth: 350 * 1.7,
     minHeight: 350 + appBarHeight,
     aspectRatio: 1.7,
-    x: -80,
+    x: -40,
     y: 20,
     content: <FaceTime />
   },
@@ -95,13 +95,13 @@ const apps: AppsData[] = [
     img: "img/icons/terminal.png",
     content: <Terminal />
   },
-  {
-    id: "github",
-    title: "Github",
-    desktop: false,
-    img: "img/icons/github.png",
-    link: "https://github.com/Renovamen/playground-macos"
-  },
+//  {
+//    id: "github",
+//    title: "Github",
+ //   desktop: false,
+//    img: "img/icons/github.png",
+//    link: "https://github.com/Renovamen/playground-macos"
+//  },
   {
   id: "chat",
   title: "Chat",

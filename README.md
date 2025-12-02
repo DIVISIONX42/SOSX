@@ -7,7 +7,6 @@ Powered by [React](https://reactjs.org/) + [Zustand](https://zustand-demo.pmnd.r
 ![light mode](./public/screenshots/light.jpg)
 ![dark mode](./public/screenshots/dark.jpg)
 
-
 &nbsp;
 
 ©️honor 2 hero OC🫆

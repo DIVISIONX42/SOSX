@@ -14,6 +14,7 @@ interface ChatProps {
 }
 
 export function Chat({ currentUser }: ChatProps) {
+
   const [msgs, setMsgs] = useState<any[]>([]);
   const [text, setText] = useState("");
   const [typing, setTyping] = useState(false);
@@ -105,6 +106,8 @@ export function Chat({ currentUser }: ChatProps) {
   }
 
   return (
+  <div className="flex flex-col h-full w-full overflow-hidden">
+
     <div
       style={{
         display: "flex",
@@ -236,6 +239,7 @@ export function Chat({ currentUser }: ChatProps) {
           Send
         </button>
       </div>
+    </div>
     </div>
   );
 }

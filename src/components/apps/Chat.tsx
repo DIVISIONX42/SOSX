@@ -239,3 +239,6 @@ export function Chat({ currentUser }: ChatProps) {
     </div>
   );
 }
+
+export default Chat;
+

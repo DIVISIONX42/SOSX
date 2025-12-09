@@ -1,6 +1,6 @@
 # 🐦‍🔥✖️🐇 BurningXBunny
 
-This playground is a hidden S.0.S. 3 the world ~ [505](https://sim-os.vercel.app/)
+This playground is a hidden S.0.S. 3 the world ~ [505](https://sosx42.vercel.app/)
 
 Powered by [React](https://reactjs.org/) + [Zustand](https://zustand-demo.pmnd.rs/) + [UnoCSS](https://uno.antfu.me/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/).
 

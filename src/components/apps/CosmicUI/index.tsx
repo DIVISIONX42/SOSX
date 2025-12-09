@@ -26,6 +26,8 @@ const [activeTab, setActiveTab] = useState("personas");
   const [modalOpen, setModalOpen] = useState(false);
   const [modalItem, setModalItem] = useState(null as any);
   const { push, ToastContainer } = useToast();
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  
   return (
     <div className="cosmicui-container">
       {/* ---- Header ---- */}

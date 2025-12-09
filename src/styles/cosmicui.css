@@ -1,0 +1,68 @@
+.cosmicui-container {
+  height: 100%;
+  width: 100%;
+  background: #0b0d12;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-family: Inter, sans-serif;
+}
+
+.cosmicui-header {
+  padding: 12px 20px;
+  border-bottom: 1px solid #222;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cosmicui-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.cosmicui-tab {
+  padding: 6px 14px;
+  background: #1a1d23;
+  border-radius: 8px;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+.cosmicui-tab.active {
+  background: #4a6cff;
+  border-color: #4a6cff;
+}
+
+.cosmicui-content {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.cosmicui-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.cosmicui-card {
+  background: #16181d;
+  border: 1px solid #222;
+  padding: 14px;
+  border-radius: 10px;
+}
+
+.cosmicui-wishlist li {
+  background: #16181d;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 6px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tag {
+  background: #333;
+  padding: 4px 8px;
+  border-radius: 6px;
+}

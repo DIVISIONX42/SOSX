@@ -1,0 +1,16 @@
+[
+  {
+    "id": "earth-temp",
+    "name": "Earth Temperature",
+    "short": "Global surface temperature trends.",
+    "description": "Data from NASA GISS Surface Temperature Analysis.",
+    "source": "NASA"
+  },
+  {
+    "id": "solar-activity",
+    "name": "Solar Activity",
+    "short": "Historical solar cycles and activity.",
+    "description": "Sunspot records, flare intensity, solar radiation.",
+    "source": "NOAA"
+  }
+]

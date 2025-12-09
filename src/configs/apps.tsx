@@ -1,5 +1,6 @@
 import { appBarHeight } from "~/utils";
 import type { AppsData } from "~/types";
+import CosmicUI from "~/components/apps/CosmicUI";
 
 const apps: AppsData[] = [
   {
@@ -36,6 +37,15 @@ const apps: AppsData[] = [
     x: -0,
     y: 20,
     content: <NetWorx />
+  },
+  {
+    id: "cosmicui",
+    title: "CosmicUI",
+    desktop: true,
+    width: 960,
+    height: 640,
+    img: "img/icons/typora.png",
+    content: <CosmicUI />
   },
   {
     id: "typora",
@@ -88,19 +98,19 @@ const apps: AppsData[] = [
     img: "img/icons/terminal.png",
     content: <Terminal />
   },
-//  {
-//    id: "github",
-//    title: "Github",
- //   desktop: false,
-//    img: "img/icons/github.png",
-//    link: "https://github.com/Renovamen/playground-macos"
-//  },
+  //  {
+  //    id: "github",
+  //    title: "Github",
+  //   desktop: false,
+  //    img: "img/icons/github.png",
+  //    link: "https://github.com/Renovamen/playground-macos"
+  //  },
   {
-  id: "chat",
-  title: "Chat",
-  desktop: true,
-  img: "img/icons/github.png",
-  content: <Chat />
+    id: "chat",
+    title: "Chat",
+    desktop: true,
+    img: "img/icons/github.png",
+    content: <Chat />
   }
 ];
 

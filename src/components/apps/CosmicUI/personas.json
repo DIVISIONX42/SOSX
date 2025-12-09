@@ -1,0 +1,4 @@
+[
+  { "id": "ux1", "name": "Astra", "role": "Explorer", "description": "Curious space UI tester." },
+  { "id": "ux2", "name": "Nova", "role": "Engineer", "description": "Builds cosmic interfaces." }
+]

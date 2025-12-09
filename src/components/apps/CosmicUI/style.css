@@ -1,0 +1,87 @@
+/* Base cosmic background */
+body.cosmic-bg {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at 30% 30%, #1a2633, #060b10 70%);
+  background-attachment: fixed;
+  color: #e8faff;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+.cosmic-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(10, 18, 28, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.app-icon {
+  width: 34px;
+  height: 34px;
+  filter: drop-shadow(0 0 6px #4cd3ff);
+}
+
+#top-nav {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(12, 22, 32, 0.7);
+}
+
+.tab-btn {
+  padding: 10px 16px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+}
+
+.tab-btn.active {
+  color: #6ee9ff;
+  text-shadow: 0 0 8px #3ad0ff;
+}
+
+/* Mobile nav */
+#mobile-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: rgba(12, 22, 32, 0.8);
+  display: none;
+  padding: 10px;
+  justify-content: space-around;
+}
+
+/* Content area */
+#content {
+  padding: 20px;
+}
+
+/* Cards */
+.dataset-card, .persona-card {
+  padding: 18px;
+  margin-bottom: 16px;
+  background: rgba(22, 33, 45, 0.75);
+  backdrop-filter: blur(6px);
+  animation: fade-in 0.4s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cosmic-button {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+/* Mobile behavior */
+@media (max-width: 760px) {
+  #mobile-nav { display: flex; }
+  #top-nav { display: none; }
+  #desktop-header { text-align: center; justify-content: center; }
+}

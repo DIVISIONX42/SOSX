@@ -1,10 +1,7 @@
 /* ------------------------------
-   Load JSON helper
+   JSON Loader
 --------------------------------*/
-async function loadJSON(file) {
-  const res = await fetch(file);
-  return await res.json();
-}
+const loadJSON = async (file) => (await fetch(file)).json();
 
 /* ------------------------------
    App State
@@ -21,25 +18,33 @@ window.onload = async () => {
   datasets = await loadJSON("./datasets.json");
   personas = await loadJSON("./personas.json");
 
-  initTabs();
+  setupTabs();
   loadTab("dashboard");
 };
 
 /* ------------------------------
-   TABS
+   Tabs
 --------------------------------*/
-function initTabs() {
-  document.querySelectorAll(".tab-btn").forEach((btn) => {
+function setupTabs() {
+  const allButtons = [
+    ...document.querySelectorAll(".tab-btn"),
+    ...document.querySelectorAll("#mobile-nav button")
+  ];
+
+  allButtons.forEach((btn) => {
     btn.onclick = () => {
       document.querySelector(".tab-btn.active")?.classList.remove("active");
-      btn.classList.add("active");
+
+      const topMatch = document.querySelector(`#top-nav [data-tab="${btn.dataset.tab}"]`);
+      if (topMatch) topMatch.classList.add("active");
+
       loadTab(btn.dataset.tab);
     };
   });
 }
 
 function loadTab(tab) {
-  const c = document.getElementById("content");
+  const c = document.querySelector("#content");
   c.innerHTML = "";
 
   if (tab === "dashboard") renderDashboard(c);
@@ -49,7 +54,7 @@ function loadTab(tab) {
 }
 
 /* ------------------------------
-   DASHBOARD
+   Dashboard
 --------------------------------*/
 function renderDashboard(c) {
   datasets.forEach((d) => {
@@ -61,23 +66,22 @@ function renderDashboard(c) {
       <p>${d.short}</p>
     `;
 
-    const btnMore = createButton("More", () => openDatasetModal(d));
-    const btnWish = createButton(wishlist.has(d.id) ? "★" : "☆", () =>
-      toggleWishlist(d.id)
+    card.append(
+      createButton("More", () => openDatasetModal(d)),
+      createButton(wishlist.has(d.id) ? "★" : "☆", () => toggleWishlist(d.id))
     );
 
-    card.append(btnMore, btnWish);
-    c.appendChild(card);
+    c.append(card);
   });
 }
 
 /* ------------------------------
-   WISHLIST
+   Wishlist
 --------------------------------*/
 function renderWishlist(c) {
   const items = datasets.filter((d) => wishlist.has(d.id));
 
-  if (items.length === 0) {
+  if (!items.length) {
     c.innerHTML = "<p>No favorites yet. Add some from the Dashboard!</p>";
     return;
   }
@@ -85,14 +89,16 @@ function renderWishlist(c) {
   items.forEach((d) => {
     const card = document.createElement("div");
     card.className = "dataset-card cosmic-border";
+
     card.innerHTML = `<h3>${d.name}</h3><p>${d.short}</p>`;
+
     card.append(createButton("Open", () => openDatasetModal(d)));
-    c.appendChild(card);
+    c.append(card);
   });
 }
 
 /* ------------------------------
-   PERSONAS
+   Personas
 --------------------------------*/
 function renderPersonas(c) {
   personas.forEach((p) => {
@@ -104,12 +110,13 @@ function renderPersonas(c) {
       <p>${p.story}</p>
     `;
 
-    const btn = createButton(p.id === activePersona ? "Selected" : "Select", () =>
-      selectPersona(p.id)
+    card.append(
+      createButton(p.id === activePersona ? "Selected" : "Select", () =>
+        selectPersona(p.id)
+      )
     );
 
-    card.append(btn);
-    c.appendChild(card);
+    c.append(card);
   });
 }
 
@@ -120,12 +127,12 @@ function selectPersona(id) {
 }
 
 /* ------------------------------
-   SETTINGS
+   Settings
 --------------------------------*/
 function renderSettings(c) {
   c.innerHTML = `
     <h2>Settings</h2>
-    <p>Additional UI settings, theme toggles, future features…</p>
+    <p>Coming soon: themes, profile, sync.</p>
   `;
 }
 
@@ -133,49 +140,59 @@ function renderSettings(c) {
    Wishlist Toggle
 --------------------------------*/
 function toggleWishlist(id) {
-  if (wishlist.has(id)) wishlist.delete(id);
-  else wishlist.add(id);
-
-  localStorage.setItem("wishlist", JSON.stringify(Array.from(wishlist)));
+  wishlist.has(id) ? wishlist.delete(id) : wishlist.add(id);
+  localStorage.setItem("wishlist", JSON.stringify([...wishlist]));
   loadTab("dashboard");
 }
 
 /* ------------------------------
-   MODAL
+   Modal
 --------------------------------*/
 function openDatasetModal(d) {
-  const modal = document.createElement("div");
-  modal.className = "modal cosmic-border";
-  modal.style.padding = "20px";
-  modal.style.background = "rgba(22, 32, 45, 0.9)";
+  const overlay = document.createElement("div");
+  overlay.className = "cosmic-modal";
+  overlay.style = `
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+  `;
 
-  modal.innerHTML = `
+  const box = document.createElement("div");
+  box.className = "cosmic-border";
+  box.style = `
+    background: #0e1a26;
+    padding: 24px;
+    width: 90%;
+    max-width: 480px;
+  `;
+
+  box.innerHTML = `
     <h2>${d.name}</h2>
     <p>${d.description}</p>
     <p><b>Source:</b> ${d.source}</p>
-    <br><button id="btn-open-sosx">Open in SOSX</button>
-    <br><br>
-    <button id="close-modal">Close</button>
+    <br>
   `;
 
-  document.body.append(modal);
+  const openBtn = createButton("Open in SOSX", () => {
+    // 🔥 SOSX HOOK:
+    // window.SOSX.openDataset(d.id);
+    overlay.remove();
+  });
 
-  document.getElementById("close-modal").onclick = () => modal.remove();
+  const closeBtn = createButton("Close", () => overlay.remove());
 
-  document.getElementById("btn-open-sosx").onclick = () => {
-    // 🔧 SOSX integration hook:
-    // window.SOSX.openDataset(d.id)
-    modal.remove();
-  };
+  box.append(openBtn, closeBtn);
+  overlay.append(box);
+  document.body.append(overlay);
 }
 
 /* ------------------------------
-   Helper: Cosmic buttons
+   Helper: Cosmic Button
 --------------------------------*/
-function createButton(text, fn) {
+function createButton(text, action) {
   const b = document.createElement("button");
   b.className = "cosmic-button";
-  b.innerText = text;
-  b.onclick = fn;
+  b.textContent = text;
+  b.onclick = action;
   return b;
 }

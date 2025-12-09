@@ -6,5 +6,16 @@ import terminal from "./terminal";
 import users from "./users";
 import wallpapers from "./wallpapers";
 import websites from "./websites";
+import CosmicUI from "../components/apps/CosmicUI/";
 
-export { apps, bunny, launchpadApps, music, terminal, users, wallpapers, websites };
+export {
+  apps,
+  bunny,
+  CosmicUI,
+  launchpadApps,
+  music,
+  terminal,
+  users,
+  wallpapers,
+  websites
+};

@@ -49,7 +49,7 @@ export default function Login(
       }}
       onClick={loginHandle}
     >
-      <div className="inline-block w-auto relative top-1/2 p-8 top-[25%] text-center justify-center justify-items-center relative backdrop-blur-4 rounded-full neon-red-orange">
+      <div className="inline-block w-auto relative top-1/4 p-8 text-center justify-center justify-items-center relative backdrop-blur-4 rounded-full neon-red-orange">
         <img
           className="rounded-full size-42 mb-2 mx-auto neon-red-orange"
           src={selectedUser.avatar}

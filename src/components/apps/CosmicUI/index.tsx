@@ -58,7 +58,7 @@ const [activeTab, setActiveTab] = useState("personas");
                     <CButton style={{ marginLeft: 8 }} onClick={() => { push(`Added ${p.name} to wishlist`); }}>⭐</CButton>
                   </div>
                 </div>
-            ))}
+            )}
           </div>
         )}
 

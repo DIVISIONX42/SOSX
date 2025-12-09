@@ -14,7 +14,7 @@ declare global {
   const BunnyBackgroundProvider: typeof import('./components/bg/BunnyBackgroundProvider.jsx')['default']
   const BunnyLines: typeof import('./components/bg/BunnyLines')['default']
   const BunnyPortal: typeof import('./components/bg/BunnyPortal')['default']
-  const Chat: typeof import('./components/apps/Chat')['Chat']
+  const Chat: typeof import('./components/apps/Chat')['default']
   const ControlCenterMenu: typeof import('./components/menus/ControlCenterMenu')['default']
   const Dock: typeof import('./components/dock/Dock')['default']
   const DockItem: typeof import('./components/dock/DockItem')['default']

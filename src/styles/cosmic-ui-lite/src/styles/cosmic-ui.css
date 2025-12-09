@@ -1,0 +1,89 @@
+/* ========================================
+   COSMIC UI - MODULAR CSS ARCHITECTURE
+   
+   A lightweight, zero-dependency TypeScript UI component library
+   for futuristic/space-themed interfaces.
+   
+   Features:
+   - SVG-based components with animated gradients
+   - Responsive design with mobile-first approach
+   - Cosmic effects with particle animations
+   - Zero runtime dependencies
+   - Full TypeScript support
+   
+   Component Library:
+   - Buttons (4 variants with hover effects)
+   - Modals (full-featured with backdrop)  
+   - Cards (content containers with hover effects)
+   - Info (overlay popups with 5 color themes)
+   - Tags (location/status with flip orientation)
+   ======================================== */
+
+/* ========================================
+   BASE STYLES
+   Core variables, shared components, and utilities
+   ======================================== */
+
+@import url('./base/_variables.css');
+@import url('./base/_shared.css');
+@import url('./base/_responsive.css');
+
+/* ========================================
+   ANIMATIONS
+   Keyframes and hover effects for all components
+   ======================================== */
+
+@import url('./animations/_keyframes.css');
+@import url('./animations/_hover-effects.css');
+
+/* ========================================
+   COMPONENTS
+   Individual component styles with full documentation
+   ======================================== */
+
+@import url('./components/_button.css');
+@import url('./components/_modal.css');
+@import url('./components/_card.css');
+@import url('./components/_info.css');
+@import url('./components/_tag.css');
+
+/* ========================================
+   ARCHITECTURE NOTES
+   
+   File Structure:
+   src/styles/
+   ├── cosmic-ui.css              # Main entry point (this file)
+   ├── base/
+   │   ├── _variables.css         # CSS custom properties and design tokens
+   │   ├── _shared.css           # Shared component styles and utilities
+   │   └── _responsive.css       # Mobile-first responsive design
+   ├── animations/
+   │   ├── _keyframes.css        # All animation definitions
+   │   └── _hover-effects.css    # Interactive hover states
+   └── components/
+       ├── _button.css           # Button component styles
+       ├── _modal.css            # Modal component styles  
+       ├── _card.css             # Card component styles
+       ├── _info.css             # Info popup component styles
+       └── _tag.css              # Tag component styles
+
+   Design System:
+   - CSS Custom Properties for consistent theming
+   - Shared base styles reduce duplication
+   - Component isolation for maintainability
+   - Animation system with performance optimization
+   - Responsive design with accessibility considerations
+   
+   Performance Features:
+   - Minimal CSS custom property usage for IE11+ support
+   - Optimized animations with GPU acceleration
+   - Reduced motion support for accessibility
+   - High DPI screen enhancements
+   - Efficient selector specificity management
+   
+   Build Integration:
+   - PostCSS processing for vendor prefixes
+   - CSS minification and optimization
+   - Tree-shaking support for unused styles
+   - Source map generation for debugging
+   ======================================== */

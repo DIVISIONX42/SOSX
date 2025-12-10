@@ -61,6 +61,8 @@ declare global {
   const createSvgElements: typeof import('./components/apps/CosmicUI/cosmic-ui/src/utils/gradients')['createSvgElements']
   const forwardRef: typeof import('react')['forwardRef']
   const getGradientStops: typeof import('./components/apps/CosmicUI/cosmic-ui/src/utils/gradients')['getGradientStops']
+  const index0: typeof import('./components/apps/CosmicUI/index0')['default']
+  const index000: typeof import('./components/apps/CosmicUI/index000')['default']
   const lazy: typeof import('react')['lazy']
   const memo: typeof import('react')['memo']
   const rollupConfig: typeof import('./components/apps/CosmicUI/cosmic-ui/rollup.config.js')['default']

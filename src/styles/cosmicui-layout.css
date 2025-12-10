@@ -1,0 +1,79 @@
+.cosmic-ui-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* BACKGROUND CANVAS */
+.cosmic-ui-bg-layer {
+  position: fixed;
+  inset: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* SIDEBAR */
+.cosmic-sidebar {
+  width: 220px;
+  background: rgba(10, 20, 30, 0.7);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid var(--cui-primary);
+  z-index: 3;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--cui-primary);
+  margin-bottom: 20px;
+}
+
+.sidebar-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s ease;
+  color: #ddd;
+}
+
+.sidebar-item.active,
+.sidebar-item:hover {
+  background: rgba(0,255,255,0.1);
+  color: #fff;
+}
+
+.sidebar-item .icon {
+  margin-right: 8px;
+}
+
+/* MAIN CONTENT */
+.cosmic-main {
+  flex: 1;
+  padding: 20px;
+  z-index: 2;
+  position: relative;
+}
+
+.cosmic-toolbar {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--cui-primary);
+  margin-bottom: 20px;
+}
+
+.cosmic-content-panel {
+  position: relative;
+  z-index: 3;
+}

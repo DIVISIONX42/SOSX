@@ -7,6 +7,7 @@ canvas {
   display: block;
   vertical-align: bottom;
   filter:drop-shadow(0px 0px 4.2px rgb(255, 247, 0)) drop-shadow(1px 1px 4.2px rgb(255, 153, 0));
+z-index: 0;
 }
 
 .tsparticles-container {

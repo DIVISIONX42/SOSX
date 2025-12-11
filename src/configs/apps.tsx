@@ -39,6 +39,15 @@ const apps: AppsData[] = [
     content: <NetWorx />
   },
   {
+    id: "particlesmask",
+    title: "DEV EL OPER",
+    desktop: true,
+    img: "img/icons/networx42.png",
+    x: -0,
+    y: 20,
+    content: <ParticlesMask />
+  },
+  {
     id: "cosmicui",
     title: "CosmicUI",
     desktop: true,

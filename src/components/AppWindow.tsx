@@ -3,10 +3,10 @@ import { Rnd } from "react-rnd";
 import { minMarginX, minMarginY, appBarHeight } from "~/utils";
 
 function updateVh() {
-  document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+  document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
 }
 updateVh();
-window.addEventListener('resize', updateVh);
+window.addEventListener("resize", updateVh);
 
 const FullIcon = ({ size }: { size: number }) => (
   <svg
@@ -213,7 +213,13 @@ const Window = (props: WindowProps) => {
           setMin={props.setMin}
           close={props.close}
         />
-        <span className="font-semibold text-c-700">{props.title}</span>
+        <div className="flex items-center justify-center group rounded text-sm font-semibold cursor-pointer hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-0.4">
+          <div className="group-hover:bg-black p-2 rounded-full bg-transparent w-fit h-full">
+            <h1 className="font-extrabold text-transparent text-3s  bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-transparent h-full">
+              <span>{props.title}</span>
+            </h1>
+          </div>
+        </div>
       </div>
       <div className="innner-window w-full overflow-y-hidden">{children}</div>
     </Rnd>

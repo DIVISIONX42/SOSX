@@ -213,9 +213,9 @@ const Window = (props: WindowProps) => {
           setMin={props.setMin}
           close={props.close}
         />
-        <div className="p-2 flex items-center justify-center group rounded text-sm font-semibold cursor-pointer hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-0.4">
-          <div className="group-hover:bg-black p-2 rounded-full bg-transparent w-fit h-full">
-            <h1 className="font-extrabold text-transparent text-3s  bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-transparent h-full">
+        <div className="flex items-center justify-center group rounded text-sm font-semibold cursor-pointer hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-0.4">
+          <div className="group-hover:bg-black px-2 rounded-full bg-transparent w-fit h-full">
+            <h1 className="font-extrabold text-transparent text-3s  bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-transparent h-full px-2">
               <span>{props.title}</span>
             </h1>
           </div>

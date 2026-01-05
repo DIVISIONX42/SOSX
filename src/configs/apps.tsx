@@ -75,7 +75,7 @@ const apps: AppsData[] = [
     img: "img/icons/beehivemind.png",
     content: <Safari />
   },
-  {
+/*  {
     id: "vscode",
     title: "VSCode",
     desktop: true,
@@ -85,7 +85,7 @@ const apps: AppsData[] = [
     y: -10,
     img: "img/icons/vscode.png",
     content: <VSCode />
-  },
+  },*/
   {
     id: "mirrorworld",
     title: "Mirror🪞World",

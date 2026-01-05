@@ -100,13 +100,13 @@ const apps: AppsData[] = [
     y: 20,
     content: <FaceTime />
   },
-  {
+/*  {
     id: "terminal",
     title: "Terminal",
     desktop: true,
     img: "img/icons/terminal.png",
     content: <Terminal />
-  },
+  },*/
   //  {
   //    id: "github",
   //    title: "Github",

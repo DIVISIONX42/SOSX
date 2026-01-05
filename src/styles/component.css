@@ -52,6 +52,10 @@
 
 /* --------- dock --------- */
 
+.dock img {
+border-radius:23%;  
+}
+
 .dock ul {
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.17);
 }

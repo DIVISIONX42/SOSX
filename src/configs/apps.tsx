@@ -10,19 +10,19 @@ const apps: AppsData[] = [
     img: "img/icons/launchpad.png"
   },
   {
-    id: "bunny",
-    title: "BurningXBunny",
+    id: "dreamlib",
+    title: "Dream📚Lib",
     desktop: true,
     width: 860,
     height: 500,
     show: true,
     y: -11,
-    img: "img/icons/bunny.png",
+    img: "img/icons/dreamlib.jpeg",
     content: <Bunny />
   },
   {
-    id: "notepad",
-    title: "BunPa",
+    id: "bunpad",
+    title: "Bun📝Pad",
     desktop: true,
     width: 600,
     height: 500,
@@ -31,7 +31,7 @@ const apps: AppsData[] = [
   },
   {
     id: "networx",
-    title: "NETWORX",
+    title: "NETWOR✖️",
     desktop: true,
     img: "img/icons/networx42.png",
     x: -0,
@@ -40,7 +40,7 @@ const apps: AppsData[] = [
   },
   {
     id: "particlesmask",
-    title: "DEV EL©PER",
+    title: "DEV🫎EL©PER",
     desktop: true,
     img: "img/icons/develcoper.png",
     x: -0,
@@ -49,7 +49,7 @@ const apps: AppsData[] = [
   },
   {
     id: "cosmicui",
-    title: "CosmicUI",
+    title: "Cosmic✨UI",
     desktop: true,
     width: 960,
     height: 640,
@@ -57,16 +57,16 @@ const apps: AppsData[] = [
     content: <CosmicUI />
   },
   {
-    id: "typora",
-    title: "BunNote",
+    id: "bunnote",
+    title: "Bun✍️Note",
     desktop: true,
     y: -15,
-    img: "img/icons/typora.png",
+    img: "img/icons/bunnysymbolnstu.jpeg",
     content: <Typora />
   },
   {
-    id: "safari",
-    title: "Safari",
+    id: "beehive",
+    title: "Bee♾️Hive",
     desktop: true,
     width: 1024,
     minWidth: 375,
@@ -87,10 +87,10 @@ const apps: AppsData[] = [
     content: <VSCode />
   },
   {
-    id: "facetime",
-    title: "FaceTime",
+    id: "mirrorworld",
+    title: "Mirror🪞World",
     desktop: true,
-    img: "img/icons/facetime.png",
+    img: "img/icons/themirrorworld.png",
     width: 500 * 1.7,
     height: 500 + appBarHeight,
     minWidth: 350 * 1.7,
@@ -115,8 +115,8 @@ const apps: AppsData[] = [
   //    link: "https://github.com/Renovamen/playground-macos"
   //  },
   {
-    id: "chat",
-    title: "Bu®n-It Hole",
+    id: "burnithole",
+    title: "Bu®n-It-H🔥le",
     desktop: true,
     img: "img/icons/burnithole.png",
     content: <Chat />

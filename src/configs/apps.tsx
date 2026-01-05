@@ -61,7 +61,7 @@ const apps: AppsData[] = [
     title: "Bun✍️Note",
     desktop: true,
     y: -15,
-    img: "img/icons/bunnysymbolnstu.jpeg",
+    img: "img/icons/Bbss.jpeg",
     content: <Typora />
   },
   {

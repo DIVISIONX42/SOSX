@@ -40,9 +40,9 @@ const apps: AppsData[] = [
   },
   {
     id: "particlesmask",
-    title: "DEV EL OPER",
+    title: "DEV EL©PER",
     desktop: true,
-    img: "img/icons/networx42.png",
+    img: "img/icons/develcoper.png",
     x: -0,
     y: 20,
     content: <ParticlesMask />
@@ -53,7 +53,7 @@ const apps: AppsData[] = [
     desktop: true,
     width: 960,
     height: 640,
-    img: "img/icons/typora.png",
+    img: "img/icons/cosmicui.png",
     content: <CosmicUI />
   },
   {
@@ -72,7 +72,7 @@ const apps: AppsData[] = [
     minWidth: 375,
     minHeight: 200,
     x: -20,
-    img: "img/icons/safari.png",
+    img: "img/icons/beehivemind.png",
     content: <Safari />
   },
   {
@@ -116,9 +116,9 @@ const apps: AppsData[] = [
   //  },
   {
     id: "chat",
-    title: "Chat",
+    title: "Bu®n-It Hole",
     desktop: true,
-    img: "img/icons/github.png",
+    img: "img/icons/burnithole.png",
     content: <Chat />
   }
 ];

@@ -2,13 +2,13 @@
 
 import React, { useRef, useState } from "react";
 
-interface VideoPlayerProps {
+interface PlayBunProps {
   src: string;
   title: string;
   poster?: string;
 }
 
-export function VideoPlayer({ src, title, poster }: VideoPlayerProps) {
+export function PlayBun({ src, title, poster }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
 

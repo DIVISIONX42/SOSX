@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
 import { music } from "~/configs";
-import { PlayBun } from "/workspaces/SOSX/src/components/apps/PlayBun";
+import { PlayBun } from "../src/components/apps/PlayBun";
 
 interface SliderProps {
   icon: string;

@@ -6,7 +6,7 @@ const websites: WebsitesData = {
     sites: [
       {
         id: "my-blog",
-        title: "TimeLine
+        title: "TimeLine",
         img: "https://zxh.me/img/avatar.jpg",
         link: "https://zxh.me/",
         inner: true

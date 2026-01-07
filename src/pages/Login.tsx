@@ -4,6 +4,7 @@ import { wallpapers } from "~/configs";
 import users from "~/configs/users";
 import { useStore } from "~/stores";
 import type { MacActions } from "~/types";
+import { Button } from 'react-native';
 
 export default function Login(
   props: MacActions & { setCurrentUser: (user: any) => void }
@@ -90,15 +91,15 @@ export default function Login(
         </div>
       </div>
     </div>
-    <div className="rounded-full text-center bg-yellow/23 txt-white text-sm backdrop-blur-4 border-3 border-yellow -p-4">
+    <div className="rounded-full text-center bg-yellow/23 text-white text-sm backdrop-blur-4 border-3 border-yellow p-4">
     <p>Project 42 is an open civic experiment.
 No donations. No leaders. No ideology.
 Just humans coordinating better.
 
 Play if you want.
-
-     <button>I'm in❕</button>
     </p>
 </div>
+
+         <Button>I'm in❕</Button>
   );
 }

@@ -4,7 +4,7 @@ import { wallpapers } from "~/configs";
 import users from "~/configs/users";
 import { useStore } from "~/stores";
 import type { MacActions } from "~/types";
-import { Button } from 'react-native';
+
 
 export default function Login(
   props: MacActions & { setCurrentUser: (user: any) => void }
@@ -103,7 +103,8 @@ return (
       </p>
     </div>
 
-    <Button>I'm in❕</Button>
+<button>I'm in❕</button>
+
   </>
 );
 }

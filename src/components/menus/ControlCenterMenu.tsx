@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
 import { music } from "~/configs";
-import { PlayBun } from "../apps/PlayBun";
+import { PlayBun } from "../apps/PlayBun.jsx";
 
 interface SliderProps {
   icon: string;
@@ -68,7 +68,7 @@ export default function ControlCenterMenu({
 
   return (
     <div
-      className="w-80 h-192 max-w-full shadow-menu p-2.5 text-c-black bg-c-100/70 scroll-y overflow-scroll-y"
+      className="w-80 h-142 max-w-full shadow-menu p-2.5 text-c-black bg-c-100/70 scroll-y overflow-scroll-y"
       pos="fixed top-9.5 right-0 sm:right-1.5"
       border="~ menu rounded-2xl"
       grid="~ cols-4 rows-5 gap-1"
@@ -158,17 +158,17 @@ export default function ControlCenterMenu({
           <span className="i-bi:play-fill text-2xl" onClick={() => toggleAudio(true)} />
         )}
       </div>
-      <PlayBun src="" title="Project 42 – Intro" />
+      {/*src && <PlayBun src={src} title="Project 42 – Intro" />}
 
-      <PlayBun src="" title="Project 42 – The Game" />
+      {src && <PlayBun src={src} title="Project 42 – The Game" />*/}
 
       <PlayBun
-        src="./public/img/ui/KomikoAI-video_Precise_Proteus 2.mp4"
+        src="../../../public/img/ui/KomikoAI-video_Precise_Proteus 2.mp4"
         title="BurningXBunny"
       />
 
       <PlayBun
-        src="./public/img/ui/KomikoAI-video_Precise_Proteus.mp4"
+        src="../../../public/img/ui/KomikoAI-video_Precise_Proteus.mp4"
         title="FreezingXBunny"
       />
     </div>

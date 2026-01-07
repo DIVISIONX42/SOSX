@@ -51,12 +51,12 @@ const bunny: BunnyData[] = [
         link: "https://github.com/Renovamen/playground-macos"
       },
       {
-        id: "oh-my-cv",
-        title: "Oh, My CV!",
-        file: "https://raw.githubusercontent.com/Renovamen/oh-my-cv/main/README.md",
-        icon: "i-ri:newspaper-fill",
+        id: "github",
+        title: "Github",
+        file: "https://github.com/DIVISIONX42",
+        icon: "i-ri:github-fill",
         excerpt: "Write your curriculum vitae / resume in Markdown online...",
-        link: "https://ohmycv.app"
+        link: "https://github.com/DIVISIONX42"
       },
       {
         id: "oh-vue-icons",

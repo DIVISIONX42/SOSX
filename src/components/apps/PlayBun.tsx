@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 interface PlayBunProps {
   src: string;
@@ -10,105 +9,62 @@ interface PlayBunProps {
 export function PlayBun({ src, title, poster }: PlayBunProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [autoPoster, setAutoPoster] = useState<string | undefined>(poster);
 
-  const togglePlay = async () => {
+  useEffect(() => {
+    if (poster || !src) return;
+
+    const video = document.createElement("video");
+    video.src = src;
+    video.muted = true;
+    video.playsInline = true;
+    video.crossOrigin = "anonymous";
+    video.preload = "metadata";
+
+    video.onloadedmetadata = () => {
+      video.currentTime = 0.1;
+    };
+
+    video.onseeked = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      setAutoPoster(canvas.toDataURL("image/jpeg", 0.85));
+    };
+  }, [src, poster]);
+
+  const togglePlay = () => {
     if (!videoRef.current) return;
-
-    if (playing) {
-      videoRef.current.pause();
-      setPlaying(false);
-    } else {
-      try {
-        await videoRef.current.play();
-        setPlaying(true);
-      } catch (e) {
-        console.warn("Autoplay blocked", e);
-      }
-    }
-  };
-
-  const enterFullscreen = () => {
-    const v = videoRef.current;
-    if (!v) return;
-
-    if (v.requestFullscreen) v.requestFullscreen();
-    // iOS fallback
-    // @ts-ignore
-    else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
-  };
-
-  const enterPiP = async () => {
-    const v = videoRef.current as any;
-    if (!v) return;
-
-    try {
-      if (document.pictureInPictureEnabled && !v.disablePictureInPicture) {
-        await v.requestPictureInPicture();
-      }
-    } catch (e) {
-      console.warn("PiP not supported", e);
-    }
+    playing ? videoRef.current.pause() : videoRef.current.play();
+    setPlaying(!playing);
   };
 
   return (
-    <div
-      className="
-        cc-grid col-span-4 hstack space-x-3 p-2
-        rounded-xl
-        bg-white/10 backdrop-blur-xl
-        border border-white/20
-        shadow-[0_0_20px_rgba(120,80,255,0.35)]
-        hover:shadow-[0_0_28px_rgba(120,120,255,0.55)]
-        transition-all
-      "
-    >
+    <div className="cc-grid col-span-4 hstack space-x-3 p-2">
       <video
         ref={videoRef}
         src={src}
-        poster={poster}
+        poster={autoPoster}
+        muted
         playsInline
         preload="metadata"
-        className="
-          w-20 h-12 rounded-lg object-cover
-          ring-1 ring-purple-400/40
-          shadow-[0_0_12px_rgba(120,80,255,0.45)]
-        "
+        className="w-20 h-12 rounded-lg object-cover"
         onEnded={() => setPlaying(false)}
       />
 
-      <div className="flex-1 overflow-hidden">
-        <div className="font-medium text-sm truncate">{title}</div>
-        <div className="cc-text text-xs opacity-70">Video</div>
+      <div className="flex-1">
+        <div className="font-medium text-sm">{title}</div>
+        <div className="cc-text">Video</div>
       </div>
 
-      {/* Play / Pause */}
       <span
-        className={
-          playing
-            ? "i-bi:pause-fill text-2xl cursor-pointer text-purple-300"
-            : "i-bi:play-fill text-2xl cursor-pointer text-purple-300"
-        }
+        className={playing ? "i-bi:pause-fill text-2xl" : "i-bi:play-fill text-2xl"}
         onClick={togglePlay}
-      />
-
-      {/* PiP */}
-      <span
-        className="i-bi:picture-in-picture text-xl cursor-pointer text-blue-300"
-        onClick={enterPiP}
-        title="Picture in Picture"
-      />
-
-      {/* Fullscreen */}
-      <span
-        className="i-bi:fullscreen text-xl cursor-pointer text-blue-300"
-        onClick={enterFullscreen}
-      />
-
-      {/* Download */}
-      <a
-        href={src}
-        download
-        className="i-bi:download text-xl cursor-pointer text-purple-200"
       />
     </div>
   );

@@ -68,10 +68,10 @@ export default function ControlCenterMenu({
 
   return (
     <div
-      className="w-80 h-96 max-w-full shadow-menu p-2.5 text-c-black bg-c-100/70"
+      className="w-80 h-192 max-w-full shadow-menu p-2.5 text-c-black bg-c-100/70 scroll-y overflow-scroll-y"
       pos="fixed top-9.5 right-0 sm:right-1.5"
       border="~ menu rounded-2xl"
-      grid="~ cols-4 rows-5 gap-2"
+      grid="~ cols-4 rows-5 gap-1"
       ref={controlCenterRef}
     >
       <div className="cc-grid row-span-2 col-span-2 p-2 flex flex-col justify-around">

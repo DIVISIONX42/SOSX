@@ -43,6 +43,7 @@ declare global {
   const PATHS: typeof import('./components/apps/CosmicUI/cosmic-ui/src/utils/svg')['PATHS']
   const ParticlesCanvas: typeof import('./components/bg/ParticlesCanvas')['default']
   const ParticlesMask: typeof import('./components/apps/ParticlesMask')['default']
+  const PlayBun: typeof import('./components/apps/PlayBun')['PlayBun']
   const Safari: typeof import('./components/apps/Safari')['default']
   const Spotlight: typeof import('./components/Spotlight')['default']
   const Terminal: typeof import('./components/apps/Terminal')['default']

@@ -8,7 +8,7 @@ interface PlayBunProps {
   poster?: string;
 }
 
-export function PlayBun({ src, title, poster }: VideoPlayerProps) {
+export function PlayBun({ src, title, poster }: PlayBunProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
 
@@ -57,11 +57,7 @@ export function PlayBun({ src, title, poster }: VideoPlayerProps) {
       />
 
       {/* Download */}
-      <a
-        href={src}
-        download
-        className="i-bi:download text-xl cursor-pointer"
-      />
+      <a href={src} download className="i-bi:download text-xl cursor-pointer" />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
 import { music } from "~/configs";
-import { PlayBun } from "./PlayBun";
+import { PlayBun } from "/workspaces/SOSX/src/components/apps/PlayBun";
 
 interface SliderProps {
   icon: string;
@@ -158,16 +158,19 @@ export default function ControlCenterMenu({
           <span className="i-bi:play-fill text-2xl" onClick={() => toggleAudio(true)} />
         )}
       </div>
+      <PlayBun src="" title="Project 42 – Intro" />
+
+      <PlayBun src="" title="Project 42 – The Game" />
+
       <PlayBun
-  src="/videos/project42-intro.mp4"
-  title="Project 42 – Intro"
-/>
+        src="/workspaces/SOSX/public/img/ui/KomikoAI-video_Precise_Proteus 2.mp4"
+        title="BurningXBunny"
+      />
 
-<PlayBun
-  src="/videos/project42-game.mp4"
-  title="Project 42 – The Game"
-/>
-
+      <PlayBun
+        src="/workspaces/SOSX/public/img/ui/KomikoAI-video_Precise_Proteus.mp4"
+        title="FreezingXBunny"
+      />
     </div>
   );
 }

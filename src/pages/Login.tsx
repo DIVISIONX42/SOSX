@@ -89,9 +89,7 @@ return (
           {sign}
         </div>
       </div>
-    </div>
-
-    <div className="rounded-full text-center bg-yellow/23 text-white text-sm backdrop-blur-4 border-3 border-yellow p-4">
+      <div className="rounded-full text-center bg-yellow/23 text-white text-sm backdrop-blur-4 border-3 border-yellow p-4">
       <p>
         Project 42 is an open civic experiment.
         <br />
@@ -104,6 +102,7 @@ return (
     </div>
 
 <button>I'm in❕</button>
+    </div>
 
   </>
 );

@@ -85,10 +85,20 @@ export default function Login(
           value={password}
           onChange={handleInputChange}
         />
-        <div className="m-0 rounded text-center bg-yellow/23 text-white text-sm backdrop-blur-4 border-1 border-yellow p-2">
+        <div className="m-0 rounded-full text-center bg-yellow/23 text-white text-sm backdrop-blur-4 border-1 border-yellow p-2">
           {sign}
         </div>
       </div>
     </div>
+    <div className="rounded-full text-center bg-yellow/23 txt-white text-sm backdrop-blur-4 border-3 border-yellow -p-4">
+    <p>Project 42 is an open civic experiment.
+No donations. No leaders. No ideology.
+Just humans coordinating better.
+
+Play if you want.
+
+     <button>I'm in❕</button>
+    </p>
+</div>
   );
 }

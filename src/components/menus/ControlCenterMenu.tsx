@@ -163,12 +163,12 @@ export default function ControlCenterMenu({
       <PlayBun src="" title="Project 42 – The Game" />
 
       <PlayBun
-        src="/workspaces/SOSX/public/img/ui/KomikoAI-video_Precise_Proteus 2.mp4"
+        src="./public/img/ui/KomikoAI-video_Precise_Proteus 2.mp4"
         title="BurningXBunny"
       />
 
       <PlayBun
-        src="/workspaces/SOSX/public/img/ui/KomikoAI-video_Precise_Proteus.mp4"
+        src="./public/img/ui/KomikoAI-video_Precise_Proteus.mp4"
         title="FreezingXBunny"
       />
     </div>

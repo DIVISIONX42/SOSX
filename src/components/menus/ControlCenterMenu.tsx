@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
 import { music } from "~/configs";
+import { PlayBun } from "./PlayBun";
 
 interface SliderProps {
   icon: string;
@@ -157,6 +158,16 @@ export default function ControlCenterMenu({
           <span className="i-bi:play-fill text-2xl" onClick={() => toggleAudio(true)} />
         )}
       </div>
+      <PlayBun
+  src="/videos/project42-intro.mp4"
+  title="Project 42 – Intro"
+/>
+
+<PlayBun
+  src="/videos/project42-game.mp4"
+  title="Project 42 – The Game"
+/>
+
     </div>
   );
 }

@@ -11,7 +11,7 @@ const bunny: BunnyData[] = [
         title: "About Me",
         file: "markdown/about-me.md",
         icon: "i-la:dragon",
-        excerpt: "Hey there! I'm a dragon lost in human world..."
+        excerpt: "🫂🪽 I'm a dragon lost in human world..."
       },
       {
         id: "github-stats",

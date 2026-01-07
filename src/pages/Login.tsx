@@ -42,7 +42,8 @@ export default function Login(
     selectRef.current?.focus();
   }, []);
 
-  return (
+return (
+  <>
     <div
       className="size-full login text-center"
       style={{
@@ -50,15 +51,12 @@ export default function Login(
       }}
       onClick={loginHandle}
     >
-      <div className="inline-block w-auto relative top-1/4 p-8 text-center justify-center justify-items-center relative backdrop-blur-4 rounded-full neon-red-orange">
+      <div className="inline-block w-auto relative top-1/4 p-8 text-center justify-center justify-items-center backdrop-blur-4 rounded-full neon-red-orange">
         <img
           className="rounded-full size-42 mb-2 mx-auto neon-red-orange"
           src={selectedUser.avatar}
           alt="avatar"
         />
-        {/*        <div className="font-semibold w-7 h-7 flex justify-center items-center mt-2 text-xl text-white border-purple bg-blue/33 backdrop-blur-4 border-2 rounded-full font-mono text-2xl">
-          {selectedUser.name}
-        </div> */}
 
         <select
           ref={selectRef}
@@ -78,7 +76,7 @@ export default function Login(
         </select>
 
         <input
-          className="text-sm text-purple col-start-1 w-[7rem] col-span-4 border-purple bg-blue/33 backdrop-blur-4 border-2 rounded-full font-mono text-2xl p-2"
+          className="text-sm text-purple w-[7rem] border-purple bg-blue/33 backdrop-blur-4 border-2 rounded-full font-mono text-2xl p-2"
           type="password"
           placeholder="AC235S C0D3"
           onClick={(e) => e.stopPropagation()}
@@ -86,20 +84,26 @@ export default function Login(
           value={password}
           onChange={handleInputChange}
         />
+
         <div className="m-0 rounded-full text-center bg-yellow/23 text-white text-sm backdrop-blur-4 border-1 border-yellow p-2">
           {sign}
         </div>
       </div>
     </div>
+
     <div className="rounded-full text-center bg-yellow/23 text-white text-sm backdrop-blur-4 border-3 border-yellow p-4">
-    <p>Project 42 is an open civic experiment.
-No donations. No leaders. No ideology.
-Just humans coordinating better.
+      <p>
+        Project 42 is an open civic experiment.
+        <br />
+        No donations. No leaders. No ideology.
+        <br />
+        Just humans coordinating better.
+        <br /><br />
+        Play if you want.
+      </p>
+    </div>
 
-Play if you want.
-    </p>
-</div>
-
-         <Button>I'm in❕</Button>
-  );
+    <Button>I'm in❕</Button>
+  </>
+);
 }

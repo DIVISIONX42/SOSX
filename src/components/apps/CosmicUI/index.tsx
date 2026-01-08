@@ -27,6 +27,9 @@ import stories from "./stories.json";
 
 import { Modal, CButton, useToast } from "./ui-wrappers";
 
+import CharacterViewer from '../../canvas/CharacterViewer';
+
+
 /* TABS */
 const tabs = [
   { id: "personas", label: "Personas", icon: "👤" },

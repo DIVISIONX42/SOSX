@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 
 const CharacterModel = () => {
   // Load GLTF model (update path to your actual model)
-  const { scene } = useGLTF('/models/character.gltf'); // Ensure your model path is correct
+  const { scene } = useGLTF('../..../public/models/Fischmarkt.glb'); // Ensure your model path is correct
 
   return <primitive object={scene} scale={0.5} />;
 };
